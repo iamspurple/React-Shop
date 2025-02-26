@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { app } from "../../firebase";
-import { loginUser } from "../../store/userSlice";
+import { loginUser } from "../../store/slices/userSlice";
 import Open from "../../../public/icons/open-eye.svg";
 import Closed from "../../../public/icons/closed-eye.svg";
 
@@ -54,6 +54,7 @@ const SignUpModal = () => {
           <form className="account-form" onSubmit={(e) => e.preventDefault()}>
             <div className="username">
               <input
+                required
                 className="username"
                 type="text"
                 value={userInfo.name}
@@ -65,6 +66,7 @@ const SignUpModal = () => {
             </div>
             <div className="email">
               <input
+                required
                 className="email"
                 type="email"
                 value={userInfo.email}
@@ -76,6 +78,7 @@ const SignUpModal = () => {
             </div>
             <div className="password">
               <input
+                required
                 className="password"
                 type={visible ? "text" : "password"}
                 value={userInfo.password}

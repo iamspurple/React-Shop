@@ -5,7 +5,7 @@ import mobile from "/images/mobile.jpg";
 import appliances from "/images/appliances.jpg";
 import tv from "/images/tv.jpg";
 
-import { useGetCategoriesQuery } from "../store/productsApi";
+import { useGetCategoriesQuery } from "../store/slices/productsApi";
 import { Link } from "react-router-dom";
 
 const CategoriesList = () => {

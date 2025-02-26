@@ -4,23 +4,20 @@ import Homepage from "./pages/Homepage";
 import { Route, Routes } from "react-router-dom";
 import ProductsOfCategory from "./pages/ProductsOfCategory";
 import SingleProduct from "./components/SingleProduct/SingleProduct";
-import { useState } from "react";
 import AllProducts from "./pages/AllProducts";
-import { useGetProductsQuery } from "./store/productsApi";
+import { useGetProductsQuery } from "./store/slices/productsApi";
 import ProductsOfSale from "./pages/ProductsOfSale";
 import Cart from "./pages/Cart";
 
-import LoginModal from "./components/AccountForm/LoginModal";
-import SignUpModal from "./components/AccountForm/SignUpModal";
+import LoginModal from "./components/AccountModal/LoginModal";
+import SignUpModal from "./components/AccountModal/SignUpModal";
 
 function App() {
-  const [search, setSearch] = useState("");
-
   const { data } = useGetProductsQuery();
 
   return (
     <>
-      <Header search={search} setSearch={setSearch} />
+      <Header />
       <Routes>
         <Route path="/" element={<Homepage data={data} />} />
         <Route path="/categories/:category" element={<ProductsOfCategory />} />
@@ -30,6 +27,10 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<LoginModal />} />
         <Route path="/signup" element={<SignUpModal />} />
+        <Route
+          path="/products/search/:title"
+          element={<AllProducts data={data} />}
+        />
       </Routes>
     </>
   );

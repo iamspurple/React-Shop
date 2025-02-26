@@ -403,7 +403,7 @@ a {
   display: inline-block;
   width: 1em;
   aspect-ratio: 1;
-  background: url(../icons/Star.svg) center/contain;
+  background: url(../public/icons/Star.svg) center/contain;
 }
 
 .brands-header {
@@ -1039,6 +1039,7 @@ a {
 .account-form .submit {
   background-color: #0c68f4;
   color: white;
+  cursor: pointer;
 }
 
 .account-form-link {

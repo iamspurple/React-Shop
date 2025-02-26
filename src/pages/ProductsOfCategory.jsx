@@ -1,7 +1,7 @@
 import CategoriesList from "../components/CategoriesList";
 import ProductCard from "../components/ProductCard";
 import { Link, useParams } from "react-router-dom";
-import { useGetProductsByCategoryQuery } from "../store/productsApi";
+import { useGetProductsByCategoryQuery } from "../store/slices/productsApi";
 import ScrollToTop from "../config";
 
 const ProductsOfCategory = () => {

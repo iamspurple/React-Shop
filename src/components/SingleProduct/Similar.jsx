@@ -1,4 +1,4 @@
-import { useGetProductsByCategoryQuery } from "../../store/productsApi";
+import { useGetProductsByCategoryQuery } from "../../store/slices/productsApi";
 import ProductCard from "../ProductCard";
 import { Link } from "react-router-dom";
 

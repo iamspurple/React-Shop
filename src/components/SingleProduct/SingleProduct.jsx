@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useGetProductByIdQuery } from "../../store/productsApi";
+import { useGetProductByIdQuery } from "../../store/slices/productsApi";
 import Similar from "./Similar";
 import ScrollToTop from "../../config";
 

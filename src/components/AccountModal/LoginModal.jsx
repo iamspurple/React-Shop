@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { loginUser } from "../../store/userSlice";
+import { loginUser } from "../../store/slices/userSlice";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { app } from "../../firebase";
@@ -51,6 +51,7 @@ const LoginModal = () => {
           <form className="account-form" onSubmit={(e) => e.preventDefault()}>
             <div className="email">
               <input
+                required
                 type="email"
                 value={email}
                 placeholder="E-mail"
@@ -59,6 +60,7 @@ const LoginModal = () => {
             </div>
             <div className="password">
               <input
+                required
                 type={visible ? "text" : "password"}
                 value={password}
                 placeholder="Password"
