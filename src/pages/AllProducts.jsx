@@ -1,18 +1,20 @@
 import CategoriesList from "../components/CategoriesList";
 import ProductCard from "../components/ProductCard";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useSearchParams } from "react-router-dom";
+import { useMemo } from "react";
 
 const AllProducts = ({ data }) => {
-  const search = useSelector((state) => state.search.search);
-  console.log(search);
+  const [searchParams] = useSearchParams();
 
-  let filtered = data;
-  if (search) {
-    filtered = data?.filter((prod) =>
-      prod.title.toLowerCase().includes(search.toLowerCase())
+  const searchQueryText = searchParams.get("search");
+
+  const filtered = useMemo(() => {
+    if (!searchQueryText) return data;
+
+    return data?.filter((prod) =>
+      prod.title.toLowerCase().includes(searchQueryText.toLowerCase())
     );
-  }
+  }, [data, searchQueryText]);
 
   return (
     <div className="container">

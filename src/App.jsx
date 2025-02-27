@@ -8,9 +8,10 @@ import AllProducts from "./pages/AllProducts";
 import { useGetProductsQuery } from "./store/slices/productsApi";
 import ProductsOfSale from "./pages/ProductsOfSale";
 import Cart from "./pages/Cart";
-
-import LoginModal from "./components/AccountModal/LoginModal";
-import SignUpModal from "./components/AccountModal/SignUpModal";
+import Footer from "./components/Footer";
+import LoginModal from "./pages/AccountModal/LoginModal";
+import SignUpModal from "./pages/AccountModal/SignUpModal";
+import ContactUs from "./pages/ContactUs";
 
 function App() {
   const { data } = useGetProductsQuery();
@@ -27,11 +28,9 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<LoginModal />} />
         <Route path="/signup" element={<SignUpModal />} />
-        <Route
-          path="/products/search/:title"
-          element={<AllProducts data={data} />}
-        />
+        <Route path="/contact" element={<ContactUs />} />
       </Routes>
+      <Footer />
     </>
   );
 }

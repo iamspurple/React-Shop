@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
-export const Contacts = {
+export const contacts = {
   address: "123 Main Street, Anytown, USA",
   phone: "+1 (555) 123-4567",
   email: "TechHeimSupport@gmail.com",

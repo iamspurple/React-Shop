@@ -1,4 +1,4 @@
-import { Contacts } from "../config";
+import { contacts } from "../config";
 
 const Footer = () => {
   return (
@@ -24,9 +24,9 @@ const Footer = () => {
           <li className="footer-item">
             <span>Contact Us</span>
             <ul className="footer-inner-list">
-              <li className="address-item contacts">{Contacts.address}</li>
-              <li className="phone-item contacts">{Contacts.phone}</li>
-              <li className="email-item contacts">{Contacts.email}</li>
+              <li className="address-item contacts">{contacts.address}</li>
+              <li className="phone-item contacts">{contacts.phone}</li>
+              <li className="email-item contacts">{contacts.email}</li>
             </ul>
           </li>
           <li className="footer-item">

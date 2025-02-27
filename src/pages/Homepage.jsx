@@ -5,7 +5,6 @@ import Popular from "../components/Popular";
 import Brands from "../components/Brands";
 import Banner from "../components/Banner";
 import Advantages from "../components/Advantages";
-import Footer from "../components/Footer";
 
 const Homepage = ({ data }) => {
   return (
@@ -21,7 +20,6 @@ const Homepage = ({ data }) => {
           <Advantages />
         </div>
       </main>
-      <Footer />
     </>
   );
 };

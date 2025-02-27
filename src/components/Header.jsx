@@ -1,20 +1,32 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { setSearch } from "../store/slices/searchSlice";
+import {
+  Link,
+  useNavigate,
+  useSearchParams,
+  useLocation,
+  NavLink,
+} from "react-router-dom";
 
 const Header = () => {
-  const dispatch = useDispatch();
-  const search = useSelector((state) => state.search.search);
+  const location = useLocation();
+
   const goTo = useNavigate();
+
+  const [, setSearchParams] = useSearchParams();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    goTo(`/products/search/${search}`);
+
+    const text = e.target["search"].value;
+
+    if (text) {
+      location.pathname === "/products"
+        ? setSearchParams({ search: text })
+        : goTo(`/products?search=${text}`);
+      return;
+    }
+    setSearchParams();
   };
 
-  const handleSearch = (text) => {
-    dispatch(setSearch(text));
-  };
   return (
     <header id="header" className="header">
       <div className="container">
@@ -22,29 +34,43 @@ const Header = () => {
           <img className="logo-image" src="/icons/logo.svg" alt="" />
           <nav>
             <ul className="nav-list">
-              <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+              <NavLink
+                to="/"
+                style={({ isActive }) => ({
+                  textDecoration: "none",
+                  color: isActive ? "#0c68f4" : "inherit",
+                })}
+              >
                 <li>Home</li>
-              </Link>
-              <Link
+              </NavLink>
+              <NavLink
                 to="/products"
-                style={{ textDecoration: "none", color: "inherit" }}
+                style={({ isActive }) => ({
+                  textDecoration: "none",
+                  color: isActive ? "#0c68f4" : "inherit",
+                })}
               >
                 <li>Products</li>
-              </Link>
-              <Link style={{ textDecoration: "none", color: "inherit" }}>
+              </NavLink>
+              <NavLink
+                to="/contact"
+                style={({ isActive }) => ({
+                  textDecoration: "none",
+                  color: isActive ? "#0c68f4" : "inherit",
+                })}
+              >
                 <li>Contact Us</li>
-              </Link>
+              </NavLink>
             </ul>
           </nav>
           <ul className="icons-list">
             <li>
-              <form className="header-form" onSubmit={(e) => handleSubmit(e)}>
-                <input
-                  placeholder="Search... "
-                  type="search"
-                  value={search}
-                  onChange={(e) => handleSearch(e.target.value)}
-                />
+              <form
+                autoComplete="off"
+                className="header-form"
+                onSubmit={(e) => handleSubmit(e)}
+              >
+                <input placeholder="Search... " type="search" name="search" />
               </form>
             </li>
             <li>

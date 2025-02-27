@@ -892,7 +892,7 @@ a {
 }
 
 .similar-list {
-  margin-top: 1em;
+  margin-block: 1em;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -1057,4 +1057,112 @@ a {
 .account-form-link .link {
   color: #0c68f4;
   font-weight: 300;
+}
+
+.contact-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin-block: 50px;
+}
+
+.contact-item {
+  position: relative;
+  text-align: center;
+  padding-top: 60px;
+}
+
+.contact-item h3 {
+  font-weight: 400;
+  font-size: 20px;
+  margin-top: 0;
+}
+
+.contact-item span {
+  font-weight: 200;
+  font-size: 16px;
+  color: var(--light-grey);
+}
+
+.contact-list li::before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  right: 40%;
+  width: 3em;
+  aspect-ratio: 1;
+}
+
+.contact-list .office::before {
+  background: url(../public/icons/Contact/office.svg) center/contain no-repeat;
+}
+
+.contact-list .email::before {
+  background: url(../public/icons/Contact/email.svg) center/contain no-repeat;
+}
+
+.contact-list .phone::before {
+  background: url(../public/icons/Contact/phone.svg) center/contain no-repeat;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: baseline;
+  margin-block: 2em;
+}
+
+.form-message {
+  max-width: 500px;
+}
+
+.form-message h2 {
+  font-weight: 400;
+  font-size: 24px;
+}
+
+.form-message p {
+  font-weight: 200;
+  font-size: 20px;
+  color: var(--light-grey);
+  line-height: 1.5;
+}
+
+.contact-form {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1em;
+  font-weight: 200;
+  font-size: 16px;
+  color: var(--light-grey);
+}
+
+.contact-form > * {
+  width: 100%;
+  border-radius: 7px;
+}
+
+.contact-form input {
+  padding: 1em;
+  border: 1px var(--grey) solid;
+}
+
+.contact-form textarea {
+  padding: 1.5em;
+  height: 190px;
+  width: 100%;
+  border: 1px var(--grey) solid;
+}
+
+.contact-form button {
+  font-weight: 300;
+  background-color: #0c68f4;
+  color: white;
+  padding: 1em 4em;
+  width: fit-content;
 }
