@@ -79,7 +79,7 @@ const Header = () => {
               </Link>
             </li>
             <li>
-              <Link to="/login">
+              <Link to="/register">
                 <img src="/icons/profile.svg" alt="login" />
               </Link>
             </li>

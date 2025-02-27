@@ -1,14 +1,15 @@
 import { useDispatch } from "react-redux";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { app } from "../../firebase";
 import { loginUser } from "../../store/slices/userSlice";
 import Open from "../../../public/icons/open-eye.svg";
 import Closed from "../../../public/icons/closed-eye.svg";
+import Button from "../../../public/icons/close-button.svg";
 
 import { useState } from "react";
 
-const SignUpModal = () => {
+const SignUpModal = ({ setOpened }) => {
   const [visible, setVisible] = useState(false);
 
   const toggleVisible = () => {
@@ -36,82 +37,76 @@ const SignUpModal = () => {
   };
 
   return (
-    <div className="modal">
-      <div className="modal-wrapper">
-        <div className="modal-container">
-          <div className="account-form-mode">
-            <div className="not-active">
-              <Link
-                style={{ textDecoration: "none", color: "inherit" }}
-                to="/login"
-              >
-                Log In
-              </Link>
-            </div>
-            <div className="active">Create Account</div>
+    <div className="modal-wrapper">
+      <div className="modal-container">
+        <button className="close-button" onClick={() => goTo(-1)} type="button">
+          <img src={Button} alt="close" />
+        </button>
+        <div className="account-form-mode">
+          <div onClick={() => setOpened("login")} className="not-active">
+            Log In
           </div>
-          <h2 className="account-form-title">Create your account</h2>
-          <form className="account-form" onSubmit={(e) => e.preventDefault()}>
-            <div className="username">
-              <input
-                required
-                className="username"
-                type="text"
-                value={userInfo.name}
-                placeholder="Username"
-                onChange={(e) =>
-                  setUserInfo({ ...userInfo, name: e.target.value })
-                }
-              />
-            </div>
-            <div className="email">
-              <input
-                required
-                className="email"
-                type="email"
-                value={userInfo.email}
-                placeholder="E-mail"
-                onChange={(e) =>
-                  setUserInfo({ ...userInfo, email: e.target.value })
-                }
-              />
-            </div>
-            <div className="password">
-              <input
-                required
-                className="password"
-                type={visible ? "text" : "password"}
-                value={userInfo.password}
-                placeholder="Password"
-                onChange={(e) =>
-                  setUserInfo({ ...userInfo, password: e.target.value })
-                }
-              />
-              <button
-                className="visible"
-                onClick={() => toggleVisible()}
-                type="button"
-              >
-                <img src={visible ? Open : Closed} alt="Change visability" />
-              </button>
-            </div>
+          <div className="active">Create Account</div>
+        </div>
+        <h2 className="account-form-title">Create your account</h2>
+        <form className="account-form" onSubmit={(e) => e.preventDefault()}>
+          <div className="username">
+            <input
+              required
+              className="username"
+              type="text"
+              value={userInfo.name}
+              placeholder="Username"
+              onChange={(e) =>
+                setUserInfo({ ...userInfo, name: e.target.value })
+              }
+            />
+          </div>
+          <div className="email">
+            <input
+              required
+              className="email"
+              type="email"
+              value={userInfo.email}
+              placeholder="E-mail"
+              onChange={(e) =>
+                setUserInfo({ ...userInfo, email: e.target.value })
+              }
+            />
+          </div>
+          <div className="password">
+            <input
+              required
+              className="password"
+              type={visible ? "text" : "password"}
+              value={userInfo.password}
+              placeholder="Password"
+              onChange={(e) =>
+                setUserInfo({ ...userInfo, password: e.target.value })
+              }
+            />
             <button
-              className="submit"
-              type="submit"
-              onClick={() => handleSignUp(userInfo.email, userInfo.password)}
+              className="visible"
+              onClick={() => toggleVisible()}
+              type="button"
             >
-              Sign Up
+              <img src={visible ? Open : Closed} alt="Change visability" />
             </button>
-          </form>
-          <div className="account-form-link">
-            <span>Already have an account?</span>
-            <Link
-              style={{ textTransform: "none", color: "inherit" }}
-              to="/login"
-            >
-              <span className="link">Sign in</span>
-            </Link>
           </div>
+          <button
+            className="submit"
+            type="submit"
+            onClick={() => handleSignUp(userInfo.email, userInfo.password)}
+          >
+            Sign Up
+          </button>
+        </form>
+        <div className="account-form-link">
+          <span>Already have an account?</span>
+
+          <span onClick={() => setOpened("login")} className="link">
+            Sign in
+          </span>
         </div>
       </div>
     </div>

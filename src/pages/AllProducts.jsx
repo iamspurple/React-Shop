@@ -1,37 +1,47 @@
-import CategoriesList from "../components/CategoriesList";
 import ProductCard from "../components/ProductCard";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import { useMemo } from "react";
+import SideBar from "../components/SideBar";
+import { useGetProductsByCategoryQuery } from "../store/slices/productsApi";
 
 const AllProducts = ({ data }) => {
+  const params = useParams();
+  const category = params.category;
   const [searchParams] = useSearchParams();
+  const getByCat = useGetProductsByCategoryQuery(category);
+  const categoryFiltered = getByCat.data;
 
   const searchQueryText = searchParams.get("search");
 
   const filtered = useMemo(() => {
-    if (!searchQueryText) return data;
+    if (!searchQueryText && !category) return data;
 
-    return data?.filter((prod) =>
-      prod.title.toLowerCase().includes(searchQueryText.toLowerCase())
-    );
-  }, [data, searchQueryText]);
+    if (searchQueryText)
+      return data?.filter((prod) =>
+        prod.title.toLowerCase().includes(searchQueryText.toLowerCase())
+      );
+
+    if (category) return categoryFiltered;
+  }, [data, searchQueryText, category, categoryFiltered]);
 
   return (
     <div className="container">
-      <CategoriesList />
-      <ul className="all-products">
-        {filtered?.map((prod) => (
-          <Link
-            style={{ textDecoration: "none", color: "inherit" }}
-            key={prod.id}
-            to={`/products/${prod.id}`}
-          >
-            <li>
-              <ProductCard product={prod} />
-            </li>
-          </Link>
-        ))}
-      </ul>
+      <div className="products-container">
+        <SideBar />
+        <ul className="all-products">
+          {filtered?.map((prod) => (
+            <Link
+              style={{ textDecoration: "none", color: "inherit" }}
+              key={prod.id}
+              to={`/products/${prod.id}`}
+            >
+              <li>
+                <ProductCard product={prod} />
+              </li>
+            </Link>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

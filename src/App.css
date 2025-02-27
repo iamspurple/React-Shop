@@ -927,7 +927,8 @@ a {
   height: fit-content;
   background-color: white;
   border-radius: 7px;
-  padding: 30px 50px;
+  padding: 50px 50px;
+  position: relative;
 }
 
 .modal-container {
@@ -936,6 +937,19 @@ a {
   align-items: center;
   flex-direction: column;
   width: 440px;
+}
+
+.modal-container .close-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.close-button img {
+  width: 30px;
+  aspect-ratio: 1;
 }
 
 .account-form-mode {
@@ -953,6 +967,7 @@ a {
   border-bottom: 2px #0c68f4 solid;
   width: 100%;
   padding-bottom: 0.5em;
+  cursor: pointer;
 }
 
 .account-form-mode .not-active {
@@ -960,6 +975,7 @@ a {
   border-bottom: 2px var(--grey) solid;
   width: 100%;
   padding-bottom: 0.5em;
+  cursor: pointer;
 }
 
 .account-form {
@@ -1057,6 +1073,7 @@ a {
 .account-form-link .link {
   color: #0c68f4;
   font-weight: 300;
+  cursor: pointer;
 }
 
 .contact-list {
@@ -1165,4 +1182,42 @@ a {
   color: white;
   padding: 1em 4em;
   width: fit-content;
+}
+
+.sidebar {
+  max-width: 280px;
+  height: fit-content;
+  position: sticky;
+  top: 0;
+}
+
+.sidebar-title {
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.sidebar-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.sidebar-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+
+.sidebar-item span {
+  font-weight: 200;
+  font-size: 20px;
+}
+
+.products-container {
+  padding-top: 2em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
 }
