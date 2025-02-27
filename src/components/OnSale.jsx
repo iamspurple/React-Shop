@@ -10,7 +10,7 @@ const OnSale = ({ data }) => {
         <h3 className="onsale-title">Products On Sale</h3>
         <span>Shop Now!</span>
         <Link
-          to={"products/sale"}
+          to={"/products/sale"}
           style={{ textDecoration: "none", color: "inherit" }}
         >
           <span className="onsale-link">View all</span>

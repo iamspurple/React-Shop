@@ -8,9 +8,9 @@ const Popular = ({ data }) => {
     <section className="popular">
       <div className="popular-header">
         <h2 className="popular-title">Popular Products</h2>
-        <a href="/" className="popular-link">
+        <Link to="/products/popular" className="popular-link">
           View all
-        </a>
+        </Link>
       </div>
       <ul className="popular-list">
         {popular?.map((prod) => (

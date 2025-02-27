@@ -1,28 +1,47 @@
 import ProductCard from "../components/ProductCard";
-import { Link, useParams, useSearchParams } from "react-router-dom";
+import {
+  Link,
+  useParams,
+  useSearchParams,
+  useLocation,
+} from "react-router-dom";
 import { useMemo } from "react";
 import SideBar from "../components/SideBar";
-import { useGetProductsByCategoryQuery } from "../store/slices/productsApi";
+import ScrollToTop from "../config";
 
 const AllProducts = ({ data }) => {
+  ScrollToTop();
+
   const params = useParams();
   const category = params.category;
-  const [searchParams] = useSearchParams();
-  const getByCat = useGetProductsByCategoryQuery(category);
-  const categoryFiltered = getByCat.data;
 
+  const location = useLocation();
+
+  const [searchParams] = useSearchParams();
   const searchQueryText = searchParams.get("search");
 
   const filtered = useMemo(() => {
-    if (!searchQueryText && !category) return data;
+    if (
+      !searchQueryText &&
+      !category &&
+      location.pathname !== "/products/sale" &&
+      location.pathname !== "/products/popular"
+    )
+      return data;
 
     if (searchQueryText)
       return data?.filter((prod) =>
         prod.title.toLowerCase().includes(searchQueryText.toLowerCase())
       );
 
-    if (category) return categoryFiltered;
-  }, [data, searchQueryText, category, categoryFiltered]);
+    if (category) return data?.filter((prod) => prod.category === category);
+
+    if (location.pathname === "/products/sale")
+      return data?.filter((prod) => prod.onSale);
+
+    if (location.pathname === "/products/popular")
+      return data?.filter((prod) => prod.popular);
+  }, [data, searchQueryText, category, location]);
 
   return (
     <div className="container">

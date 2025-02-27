@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: "Inter";
-  src: url("../fonts/Inter_18pt-Light.woff2") format("woff2");
+  src: url("/fonts/Inter_18pt-Light.woff2") format("woff2");
   font-weight: 200;
   font-style: normal;
   font-display: swap;
@@ -12,7 +12,7 @@
 
 @font-face {
   font-family: "Inter";
-  src: url("../fonts/Inter_18pt-Regular.woff2") format("woff2");
+  src: url("/fonts/Inter_18pt-Regular.woff2") format("woff2");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -20,7 +20,7 @@
 
 @font-face {
   font-family: "Inter";
-  src: url("../fonts/Inter_18pt-Medium.woff2") format("woff2");
+  src: url("/fonts/Inter_18pt-Medium.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -28,7 +28,7 @@
 
 @font-face {
   font-family: "Inter";
-  src: url("../fonts/Inter_18pt-SemiBold.woff2") format("woff2");
+  src: url("/fonts/Inter_18pt-SemiBold.woff2") format("woff2");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -237,14 +237,16 @@ a {
   color: white;
   font-size: 16px;
   font-weight: 300;
+  display: inline-flex;
+  align-items: center;
 }
 
 .onsale-link::after {
   display: inline-block;
   content: "";
-  width: 1em;
+  width: 1.5em;
   aspect-ratio: 1;
-  background: url("../icons/arrow-right.svg");
+  background: url("../icons/arrow-right.svg") center/contain no-repeat;
 }
 
 .onsale-list {
@@ -329,15 +331,17 @@ a {
   font-size: 16px;
   font-weight: 300;
   color: black;
+  display: inline-flex;
+  align-items: center;
 }
 
 .popular-link::after {
   display: inline-block;
   content: "";
-  width: 1em;
+  width: 1.5em;
   filter: invert(100%);
   aspect-ratio: 1;
-  background: url("../icons/arrow-right.svg");
+  background: url("../icons/arrow-right.svg") center/contain no-repeat;
 }
 
 .popular-list,
@@ -359,6 +363,23 @@ a {
   width: 288px;
   height: 347px;
   box-shadow: var(--shadow);
+  position: relative;
+}
+
+.product-onSale::before {
+  content: attr(data-discount);
+  text-align: center;
+  position: absolute;
+  padding: 0.4em 0.6em;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  width: fit-content;
+  font-weight: 200;
+  font-size: 16px;
+  top: 1em;
+  left: 0;
+  color: var(--orange);
+  background-color: var(--light-orange);
 }
 
 .popular-product img {
@@ -387,6 +408,15 @@ a {
 .popular-product-price {
   font-weight: 200;
   font-size: 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.popular-product-old-price {
+  font-weight: 300;
+  font-size: 14px;
+  text-decoration: line-through;
+  color: var(--light-grey);
 }
 
 .popular-product-rating {
@@ -423,7 +453,6 @@ a {
   margin-block: 70px;
   position: relative;
   display: flex;
-  z-index: -2;
   flex-direction: row;
   justify-content: space-around;
   border-radius: 10px;
@@ -533,6 +562,7 @@ a {
   padding: 1em 3em;
   border-radius: 7px;
   cursor: pointer;
+  z-index: 2000;
 }
 
 .advantages {
@@ -684,6 +714,7 @@ a {
   justify-content: center;
   column-gap: 3em;
   row-gap: 1em;
+  margin-bottom: 2em;
 }
 
 .single-product {
@@ -1207,6 +1238,7 @@ a {
   flex-direction: row;
   align-items: center;
   gap: 5px;
+  cursor: pointer;
 }
 
 .sidebar-item span {

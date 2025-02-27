@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
 const Banner = () => {
+  const goTo = useNavigate();
   return (
     <section className="banner">
       <div className="banner-images">
@@ -20,7 +23,13 @@ const Banner = () => {
         <p className="accent">Play Station 5</p>
         <div className="banner-info-container">
           <img className="ps" src="../images/ps55.png" alt="ps5" />
-          <button className="banner-button">Buy Now</button>
+          <button
+            type="button"
+            onClick={() => goTo("/products/27")}
+            className="banner-button"
+          >
+            Buy Now
+          </button>
         </div>
       </div>
     </section>

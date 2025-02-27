@@ -5,9 +5,13 @@ import laptop from "../../public/icons/CategoriesSideBar/laptop.svg";
 import mobile from "/icons/CategoriesSideBar/mobile.svg";
 import tv from "../../public/icons/CategoriesSideBar/tv.svg";
 
+import { useNavigate } from "react-router-dom";
+
 import { useGetCategoriesQuery } from "../store/slices/productsApi";
 
 const SideBar = () => {
+  const goTo = useNavigate();
+
   const CategoryIcons = {
     appliances,
     audio,
@@ -17,6 +21,10 @@ const SideBar = () => {
     tv,
   };
 
+  const handleClick = (cat) => {
+    goTo(`/products/category/${cat}`);
+  };
+
   const { data } = useGetCategoriesQuery();
 
   return (
@@ -24,7 +32,11 @@ const SideBar = () => {
       <h3 className="sidebar-title">Categories</h3>
       <ul className="sidebar-list">
         {data?.map((cat) => (
-          <li className="sidebar-item" key={cat}>
+          <li
+            onClick={() => handleClick(cat)}
+            className="sidebar-item"
+            key={cat}
+          >
             <img width={30} src={CategoryIcons[cat]} alt={cat} />
             <span>{cat}</span>
           </li>
