@@ -24,7 +24,7 @@ const CategoriesList = () => {
     <section className="categories">
       <ul className="categories-list">
         {data?.map((cat) => (
-          <Link key={cat} to={`products/category/${cat}`}>
+          <Link key={cat} to={`products?category=${cat}`}>
             <li className="category-card">
               <img src={CategoryImages[cat]} alt={cat} />
               <span>{cat}</span>

@@ -1,4 +1,8 @@
 import { contacts } from "../config";
+import facebook from "../../public/icons/Facebook.svg";
+import twitter from "../../public/icons/twitter.svg";
+import youtube from "../../public/icons/Youtube.svg";
+import instagram from "../../public/icons/Instagram.svg";
 
 const Footer = () => {
   return (
@@ -45,25 +49,22 @@ const Footer = () => {
             <ul className="footer-icons-list">
               <li>
                 <a href="/">
-                  <img src="../icons/Facebook.svg" alt="facebook" />
+                  <img src={facebook} alt="facebook" />
                 </a>
               </li>
               <li>
-                {" "}
                 <a href="/">
-                  <img src="../icons/twitter.svg" alt="twitter" />
+                  <img src={twitter} alt="twitter" />
                 </a>
               </li>
               <li>
-                {" "}
                 <a href="/">
-                  <img src="../icons/Instagram.svg" alt="twitter" />
+                  <img src={instagram} alt="instagram" />
                 </a>
               </li>
               <li>
-                {" "}
                 <a href="/">
-                  <img src="../icons/Youtube.svg" alt="twitter" />
+                  <img src={youtube} alt="youtube" />
                 </a>
               </li>
             </ul>

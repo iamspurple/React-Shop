@@ -2,17 +2,17 @@ import appliances from "/icons/CategoriesSideBar/appliances.svg";
 import audio from "../../public/icons/CategoriesSideBar/audio.svg";
 import gaming from "/icons/CategoriesSideBar/gaming.svg";
 import laptop from "../../public/icons/CategoriesSideBar/laptop.svg";
-import mobile from "/icons/CategoriesSideBar/mobile.svg";
+import mobile from "../../public/icons/CategoriesSideBar/mobile.svg";
 import tv from "../../public/icons/CategoriesSideBar/tv.svg";
 
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { useGetCategoriesQuery } from "../store/slices/productsApi";
 
-const SideBar = () => {
+const SideBar = ({ setCurrentPage }) => {
+  const [searchParams] = useSearchParams();
   const goTo = useNavigate();
-  const params = useParams();
-  console.log(params);
+  const category = searchParams.get("category");
 
   const CategoryIcons = {
     appliances,
@@ -24,7 +24,8 @@ const SideBar = () => {
   };
 
   const handleClick = (cat) => {
-    goTo(`/products/category/${cat}`);
+    goTo(`/products?category=${cat}`);
+    setCurrentPage(1);
   };
 
   const { data } = useGetCategoriesQuery();
@@ -37,7 +38,7 @@ const SideBar = () => {
           <li
             onClick={() => handleClick(cat)}
             className={
-              params.category === cat ? "sidebar-item active" : "sidebar-item"
+              category === cat ? "sidebar-item active" : "sidebar-item"
             }
             key={cat}
           >

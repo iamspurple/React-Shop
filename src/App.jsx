@@ -22,7 +22,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Homepage data={data} />} />
         <Route
-          path="/products/category/:category"
+          path="/products?category=:category"
           element={<AllProducts data={data} />}
         />
         <Route path="/products" element={<AllProducts data={data} />} />

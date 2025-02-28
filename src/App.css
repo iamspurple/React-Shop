@@ -127,7 +127,7 @@ a {
   display: inline-block;
   top: 0.2em;
   left: 0.2em;
-  background: url(../icons/search.svg) center/contain no-repeat;
+  background: url(../public/icons/search.svg) center/contain no-repeat;
 }
 
 .header-form input::placeholder {
@@ -246,7 +246,7 @@ a {
   content: "";
   width: 1.5em;
   aspect-ratio: 1;
-  background: url("../icons/arrow-right.svg") center/contain no-repeat;
+  background: url(../public/icons/arrow-right.svg) center/contain no-repeat;
 }
 
 .onsale-list {
@@ -341,7 +341,7 @@ a {
   width: 1.5em;
   filter: invert(100%);
   aspect-ratio: 1;
-  background: url("../icons/arrow-right.svg") center/contain no-repeat;
+  background: url(../public/icons/arrow-right.svg) center/contain no-repeat;
 }
 
 .popular-list,
@@ -624,15 +624,15 @@ a {
 }
 
 .address-item::before {
-  background: url(../icons/location.svg) bottom/contain no-repeat;
+  background: url(../public/icons/location.svg) bottom/contain no-repeat;
 }
 
 .phone-item::before {
-  background: url(../icons/call-calling.svg) bottom/contain no-repeat;
+  background: url(../public/icons/call-calling.svg) bottom/contain no-repeat;
 }
 
 .email-item::before {
-  background: url(../icons/sms-edit.svg) center/contain no-repeat;
+  background: url(../public/icons/sms-edit.svg) center/contain no-repeat;
 }
 
 .footer-form {
@@ -665,7 +665,7 @@ a {
   left: 0.2em;
   display: inline-block;
   filter: invert(100%);
-  background: url(../icons/profile.svg) center/contain no-repeat;
+  background: url(../public/icons/profile.svg) center/contain no-repeat;
 }
 
 .footer-form button {
@@ -1234,11 +1234,11 @@ a {
 
 .sidebar-list .active {
   border-radius: 10px;
-  background-color: #b4b4b4b8;
+  box-shadow: inset 0px 0px 12px -2px rgba(45, 45, 45, 0.3);
 }
 
 .sidebar-item {
-  padding-left: 10px;
+  padding-inline: 10px;
   padding-block: 5px;
   display: flex;
   flex-direction: row;
@@ -1258,4 +1258,25 @@ a {
   flex-direction: row;
   justify-content: space-between;
   position: relative;
+}
+
+.pagination {
+  margin-bottom: 2em;
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+}
+
+.pagination-item {
+  font-weight: 200;
+  font-size: 18px;
+  padding: 0.6em 1em;
+}
+
+.pagination .current {
+  color: #0c68f4;
+  border-bottom: 1px #0c68f4 solid;
 }
