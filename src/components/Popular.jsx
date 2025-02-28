@@ -8,7 +8,7 @@ const Popular = ({ data }) => {
     <section className="popular">
       <div className="popular-header">
         <h2 className="popular-title">Popular Products</h2>
-        <Link to="/products/popular" className="popular-link">
+        <Link to="/products?sort=popular" className="popular-link">
           View all
         </Link>
       </div>

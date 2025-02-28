@@ -9,7 +9,7 @@ import Open from "../../../public/icons/open-eye.svg";
 import Closed from "../../../public/icons/closed-eye.svg";
 import Button from "../../../public/icons/close-button.svg";
 
-const LoginModal = ({ setOpened }) => {
+const LoginModal = ({ setOpened, setModal }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -34,9 +34,13 @@ const LoginModal = ({ setOpened }) => {
   };
 
   return (
-    <div className="modal-wrapper">
+    <div className="modal-wrapper " onClick={(e) => e.stopPropagation()}>
       <div className="modal-container">
-        <button className="close-button" onClick={() => goTo(-1)} type="button">
+        <button
+          className="close-button"
+          onClick={() => setModal(false)}
+          type="button"
+        >
           <img src={Button} alt="close" />
         </button>
         <div className="account-form-mode">

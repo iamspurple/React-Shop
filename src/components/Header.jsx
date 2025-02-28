@@ -6,7 +6,7 @@ import {
   NavLink,
 } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ setModal }) => {
   const location = useLocation();
 
   const goTo = useNavigate();
@@ -78,10 +78,8 @@ const Header = () => {
                 <img src="/icons/bag.svg" alt="cart" />
               </Link>
             </li>
-            <li>
-              <Link to="/register">
-                <img src="/icons/profile.svg" alt="login" />
-              </Link>
+            <li onClick={() => setModal(true)}>
+              <img src="/icons/profile.svg" alt="login" />
             </li>
           </ul>
         </div>

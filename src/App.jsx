@@ -9,13 +9,16 @@ import Cart from "./pages/Cart";
 import Footer from "./components/Footer";
 import ContactUs from "./pages/ContactUs";
 import AccountModal from "./pages/AccountModal/AccountModal";
+import { useState } from "react";
 
 function App() {
   const { data } = useGetProductsQuery();
 
+  const [modal, setModal] = useState(false);
+
   return (
     <>
-      <Header />
+      <Header setModal={setModal} />
       <Routes>
         <Route path="/" element={<Homepage data={data} />} />
         <Route
@@ -23,14 +26,21 @@ function App() {
           element={<AllProducts data={data} />}
         />
         <Route path="/products" element={<AllProducts data={data} />} />
-        <Route path="/products/sale" element={<AllProducts data={data} />} />
-        <Route path="/products/popular" element={<AllProducts data={data} />} />
+        <Route
+          path="/products?sort=popular"
+          element={<AllProducts data={data} />}
+        />
+        <Route
+          path="/products?sort=onSale"
+          element={<AllProducts data={data} />}
+        />
         <Route path="/products/:id" element={<SingleProduct />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/register" element={<AccountModal />} />
         <Route path="/contact" element={<ContactUs />} />
       </Routes>
       <Footer />
+      {modal ? <AccountModal setModal={setModal} /> : null}
     </>
   );
 }

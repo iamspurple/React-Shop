@@ -9,7 +9,7 @@ import Button from "../../../public/icons/close-button.svg";
 
 import { useState } from "react";
 
-const SignUpModal = ({ setOpened }) => {
+const SignUpModal = ({ setOpened, setModal }) => {
   const [visible, setVisible] = useState(false);
 
   const toggleVisible = () => {
@@ -37,9 +37,13 @@ const SignUpModal = ({ setOpened }) => {
   };
 
   return (
-    <div className="modal-wrapper">
+    <div className="modal-wrapper" onClick={(e) => e.stopPropagation()}>
       <div className="modal-container">
-        <button className="close-button" onClick={() => goTo(-1)} type="button">
+        <button
+          className="close-button"
+          onClick={() => setModal(false)}
+          type="button"
+        >
           <img src={Button} alt="close" />
         </button>
         <div className="account-form-mode">
