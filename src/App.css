@@ -1232,7 +1232,14 @@ a {
   gap: 1em;
 }
 
+.sidebar-list .active {
+  border-radius: 10px;
+  background-color: #b4b4b4b8;
+}
+
 .sidebar-item {
+  padding-left: 10px;
+  padding-block: 5px;
   display: flex;
   flex-direction: row;
   align-items: center;

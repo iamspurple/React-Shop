@@ -5,12 +5,14 @@ import laptop from "../../public/icons/CategoriesSideBar/laptop.svg";
 import mobile from "/icons/CategoriesSideBar/mobile.svg";
 import tv from "../../public/icons/CategoriesSideBar/tv.svg";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { useGetCategoriesQuery } from "../store/slices/productsApi";
 
 const SideBar = () => {
   const goTo = useNavigate();
+  const params = useParams();
+  console.log(params);
 
   const CategoryIcons = {
     appliances,
@@ -34,7 +36,9 @@ const SideBar = () => {
         {data?.map((cat) => (
           <li
             onClick={() => handleClick(cat)}
-            className="sidebar-item"
+            className={
+              params.category === cat ? "sidebar-item active" : "sidebar-item"
+            }
             key={cat}
           >
             <img width={30} src={CategoryIcons[cat]} alt={cat} />
