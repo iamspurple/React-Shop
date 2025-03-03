@@ -1,0 +1,24 @@
+@import "../../style/variables.scss";
+
+.header {
+  border-bottom: 2px $grey solid;
+
+  .title {
+    font-weight: $medium;
+    font-size: 32px;
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-block: 30px;
+  box-sizing: border-box;
+  align-items: center;
+  padding-inline: 20px;
+
+  .item:not(:first-of-type) img {
+    width: 200px;
+  }
+}

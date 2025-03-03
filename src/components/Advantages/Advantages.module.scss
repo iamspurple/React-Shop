@@ -1,0 +1,17 @@
+@import "../../style/variables.scss";
+
+.advantages {
+  margin-block: 50px;
+
+  .list {
+    display: flex;
+    justify-content: space-between;
+
+    .item {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+    }
+  }
+}

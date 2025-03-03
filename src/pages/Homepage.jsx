@@ -1,10 +1,10 @@
-import Hero from "../components/Hero";
-import CategoriesList from "../components/CategoriesList";
-import OnSale from "../components/OnSale";
-import Popular from "../components/Popular";
-import Brands from "../components/Brands";
-import Banner from "../components/Banner";
-import Advantages from "../components/Advantages";
+import Hero from "../components/Hero/Hero";
+import CategoriesList from "../components/Categories/CategoriesList";
+import OnSale from "../components/OnSale/OnSale";
+import Popular from "../components/Popular/Popular";
+import Brands from "../components/Brands/Brands";
+import Banner from "../components/Banner/Banner";
+import Advantages from "../components/Advantages/Advantages";
 
 const Homepage = ({ data, isLoading }) => {
   return (

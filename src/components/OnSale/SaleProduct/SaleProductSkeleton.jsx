@@ -1,9 +1,10 @@
 import Skeleton from "react-loading-skeleton";
-import image from "../../../public/icons/image-placeholder.svg";
+import image from "../../../../public/icons/image-placeholder.svg";
+import style from "./SaleProduct.module.scss";
 
 const SaleProductSkeleton = () => {
   return (
-    <div className="sale-product">
+    <div className={style.saleProduct}>
       <img src={image} alt="/" />
       <Skeleton
         count={2}

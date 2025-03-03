@@ -1,0 +1,38 @@
+@import "../../style/variables.scss";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 0;
+  border-bottom: 2px $light-grey solid;
+
+  .title {
+    font-weight: $medium;
+    font-size: 32px;
+  }
+
+  .link {
+    font-size: 16px;
+    font-weight: $regular;
+    color: black;
+    display: inline-flex;
+    align-items: center;
+
+    &::after {
+      display: inline-block;
+      content: "";
+      width: 1.5em;
+      filter: invert(100%);
+      aspect-ratio: 1;
+      background: url(../public/icons/arrow-right.svg) center/contain no-repeat;
+    }
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-block: 30px;
+}

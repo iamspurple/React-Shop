@@ -1,23 +1,21 @@
 import { trimTitle } from "../../config";
 
+import style from "./ProductCard.module.scss";
+
 const ProductCard = ({ product }) => {
   return (
-    <div
-      className={
-        product?.onSale ? "popular-product product-onSale" : "popular-product"
-      }
-      data-discount={`-${product.discount}%`}
-    >
+    <div className={style.popularProduct}>
+      {product?.onSale && (
+        <span className={style.discount}>{`-${product.discount}%`}</span>
+      )}
       <img src={product?.image} alt={product?.title} />
-      <span className="popular-product-title">{trimTitle(product?.title)}</span>
-      <div className="popular-product-info">
-        <div className="popular-product-price">
+      <span className={style.title}>{trimTitle(product?.title)}</span>
+      <div className={style.info}>
+        <div className={style.price}>
           {product.onSale ? (
             <>
-              <span className="popular-product-old-price">
-                ${product?.price}
-              </span>
-              <span className="popular-product-new-price">
+              <span className={style.oldPrice}>${product?.price}</span>
+              <span>
                 ${product?.price - (product?.price / 100) * product?.discount}
               </span>
             </>
@@ -25,7 +23,7 @@ const ProductCard = ({ product }) => {
             `$${product?.price}`
           )}
         </div>
-        <span className="popular-product-rating">{`4.${Math.random()
+        <span className={style.rating}>{`4.${Math.random()
           .toString()
           .split(".")[1]
           .substring(0, 1)}`}</span>

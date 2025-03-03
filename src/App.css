@@ -425,6 +425,7 @@ a {
 
 .popular-product-rating::before {
   margin: 5px;
+
   content: "";
   display: inline-block;
   width: 1em;

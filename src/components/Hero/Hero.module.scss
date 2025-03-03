@@ -1,0 +1,37 @@
+@import "../../style/variables.scss";
+
+.hero {
+  display: flex;
+  justify-content: space-around;
+  color: $dark-blue;
+
+  .title {
+    font: {
+      size: 64px;
+      weight: $bold;
+    }
+  }
+
+  .quote {
+    margin-bottom: 100px;
+    font: {
+      size: 32px;
+      weight: $medium;
+    }
+
+    .orange {
+      color: $orange;
+    }
+  }
+
+  .button {
+    color: white;
+    background-color: $orange;
+    border: none;
+    border-radius: 7px;
+    font-size: 16px;
+    font-weight: 300;
+    padding-inline: 6em;
+    padding-block: 1em;
+  }
+}

@@ -5,7 +5,9 @@ import mobile from "/images/mobile.jpg";
 import appliances from "/images/appliances.jpg";
 import tv from "/images/tv.jpg";
 
-import { useGetCategoriesQuery } from "../store/slices/productsApi";
+import style from "./Categories.module.scss";
+
+import { useGetCategoriesQuery } from "../../store/slices/productsApi";
 import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 
@@ -23,12 +25,12 @@ const CategoriesList = () => {
 
   return (
     <section className="categories">
-      <ul className="categories-list">
+      <ul className={style.list}>
         {isLoading &&
           Array(6)
             .fill(0)
             .map((item, index) => (
-              <li className="category-card" key={index}>
+              <li className={style.card} key={index}>
                 <Skeleton
                   containerClassName="skeleton-container"
                   style={{ width: "80%", height: "80%" }}
@@ -39,7 +41,7 @@ const CategoriesList = () => {
         {data &&
           data?.map((cat) => (
             <Link key={cat} to={`products?category=${cat}`}>
-              <li className="category-card">
+              <li className={style.card}>
                 <img src={CategoryImages[cat]} alt={cat} />
                 <span>{cat}</span>
               </li>

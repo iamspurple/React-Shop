@@ -1,41 +1,49 @@
-import { contacts } from "../config";
-import facebook from "../../public/icons/Facebook.svg";
-import twitter from "../../public/icons/twitter.svg";
-import youtube from "../../public/icons/Youtube.svg";
-import instagram from "../../public/icons/Instagram.svg";
+import { contacts } from "../../config";
+import facebook from "../../../public/icons/Facebook.svg";
+import twitter from "../../../public/icons/twitter.svg";
+import youtube from "../../../public/icons/Youtube.svg";
+import instagram from "../../../public/icons/Instagram.svg";
+
+import style from "./Footer.module.scss";
 
 const Footer = () => {
   return (
-    <footer className="footer">
+    <footer className={style.footer}>
       <div className="container">
-        <ul className="footer-list">
-          <li className="footer-item">
+        <ul className={style.list}>
+          <li className={style.item}>
             <span>Company</span>
-            <ul className="footer-inner-list">
+            <ul className={style.innerList}>
               <li>About us</li>
               <li>Returns</li>
               <li>Order status</li>
             </ul>
           </li>
-          <li className="footer-item">
+          <li className={style.item}>
             <span>Info</span>
-            <ul className="footer-inner-list">
+            <ul className={style.innerList}>
               <li>How it works?</li>
               <li>Our promises</li>
               <li>FAQ</li>
             </ul>
           </li>
-          <li className="footer-item">
+          <li className={style.item}>
             <span>Contact Us</span>
-            <ul className="footer-inner-list">
-              <li className="address-item contacts">{contacts.address}</li>
-              <li className="phone-item contacts">{contacts.phone}</li>
-              <li className="email-item contacts">{contacts.email}</li>
+            <ul className={style.innerList}>
+              <li className={`${style.contacts} ${style.address}`}>
+                {contacts.address}
+              </li>
+              <li className={`${style.contacts} ${style.phone}`}>
+                {contacts.phone}
+              </li>
+              <li className={`${style.contacts} ${style.email}`}>
+                {contacts.email}
+              </li>
             </ul>
           </li>
-          <li className="footer-item">
+          <li className={style.item}>
             <span>Sign up for News and Updates</span>
-            <form action="" className="footer-form">
+            <form action="" className={style.form}>
               <input
                 type="email"
                 name="email"
@@ -43,10 +51,10 @@ const Footer = () => {
                 placeholder="E-mail Address"
               />
               <button type="submit">
-                <span className="visually-hidden">Sign up</span>
+                <span className={style.hidden}>Sign up</span>
               </button>
             </form>
-            <ul className="footer-icons-list">
+            <ul className={style.socials}>
               <li>
                 <a href="/">
                   <img src={facebook} alt="facebook" />
@@ -70,7 +78,7 @@ const Footer = () => {
             </ul>
           </li>
         </ul>
-        <div className="footer-extra">
+        <div className={style.extra}>
           <span> © 2023 Tech Heim</span>
         </div>
       </div>

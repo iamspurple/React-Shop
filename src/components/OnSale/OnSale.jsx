@@ -4,6 +4,7 @@ import SaleProductSkeleton from "./SaleProduct/SaleProductSkeleton";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
 
+import style from "./OnSale.module.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -17,27 +18,23 @@ const OnSale = ({ data, isLoading }) => {
   };
 
   return (
-    <section className="onsale">
-      <div className="onsale-content">
-        <h3 className="onsale-title">Products On Sale</h3>
+    <section className={style.onsale}>
+      <div className={style.content}>
+        <h3 className={style.title}>Products On Sale</h3>
         <span>Shop Now!</span>
         <Link
           to={"/products?sort=onSale"}
           style={{ textDecoration: "none", color: "inherit" }}
         >
-          <span className="onsale-link">View all</span>
+          <span className={style.link}>View all</span>
         </Link>
       </div>
-      <div className="slider-container">
+      <div className={style.slider}>
         <Slider {...settings}>
           {isLoading &&
             Array(6)
               .fill(0)
-              .map((item) => (
-                <li key={item}>
-                  <SaleProductSkeleton />
-                </li>
-              ))}
+              .map((item, index) => <SaleProductSkeleton key={index} />)}
           {data &&
             onSaleProducts?.map((prod) => (
               <Link
@@ -45,9 +42,7 @@ const OnSale = ({ data, isLoading }) => {
                 key={prod.id}
                 style={{ textDecoration: "none", color: "inherit" }}
               >
-                <li>
-                  <SaleProduct product={prod} />
-                </li>
+                <SaleProduct product={prod} />
               </Link>
             ))}
         </Slider>

@@ -1,25 +1,25 @@
 import { Link } from "react-router-dom";
-import ProductCard from "./ProductCard/ProductCard";
-import ProductCardSkeleton from "./ProductCard/ProductCardSkeleton";
+import ProductCard from "../ProductCard/ProductCard";
+import ProductCardSkeleton from "../ProductCard/ProductCardSkeleton";
+import style from "./Popular.module.scss";
 
 const Popular = ({ data, isLoading }) => {
   const popular = data?.filter((product) => product.popular).slice(0, 4);
 
   return (
     <section className="popular">
-      <div className="popular-header">
-        <h2 className="popular-title">Popular Products</h2>
-        <Link to="/products?sort=popular" className="popular-link">
+      <div className={style.header}>
+        <h2 className={style.title}>Popular Products</h2>
+        <Link to="/products?sort=popular" className={style.link}>
           View all
         </Link>
       </div>
-      <ul className="popular-list">
+      <ul className={style.list}>
         {isLoading &&
           Array(4)
             .fill(0)
-            .map((item) => (
-              <li key={item}>
-                {" "}
+            .map((item, index) => (
+              <li key={index}>
                 <ProductCardSkeleton />
               </li>
             ))}

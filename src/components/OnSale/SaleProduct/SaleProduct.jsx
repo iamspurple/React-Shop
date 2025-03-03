@@ -1,13 +1,15 @@
 import { trimTitle } from "../../../config";
+import style from "./SaleProduct.module.scss";
 
 const SaleProduct = ({ product }) => {
   return (
-    <div className="sale-product" data-discount={`-${product.discount}%`}>
+    <div className={style.saleProduct}>
+      <span className={style.discount}>{`-${product?.discount}%`}</span>
       <img src={product?.image} alt={product?.title} />
       <span>{trimTitle(product?.title)}</span>
-      <div className="sale-product-price">
-        <span className="old-price">$ {product?.price} </span>
-        <span className="new-price">
+      <div className={style.price}>
+        <span className={style.oldPrice}>$ {product?.price} </span>
+        <span className={style.newPrice}>
           $
           {(
             product?.price -

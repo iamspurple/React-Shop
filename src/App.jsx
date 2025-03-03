@@ -1,12 +1,13 @@
-import "./App.css";
-import Header from "./components/Header";
+import "./style/style.scss";
+// import "./App.css";
+import Header from "./components/Header/Header";
 import Homepage from "./pages/Homepage";
 import { Route, Routes } from "react-router-dom";
 import SingleProduct from "./components/SingleProduct/SingleProduct";
 import AllProducts from "./pages/AllProducts";
 import { useGetProductsQuery } from "./store/slices/productsApi";
 import Cart from "./pages/Cart";
-import Footer from "./components/Footer";
+import Footer from "./components/Footer/Footer";
 import ContactUs from "./pages/ContactUs";
 import AccountModal from "./pages/AccountModal/AccountModal";
 import { useState } from "react";

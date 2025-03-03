@@ -6,6 +6,8 @@ import {
   NavLink,
 } from "react-router-dom";
 
+import style from "./Header.module.scss";
+
 const Header = ({ setModal }) => {
   const location = useLocation();
 
@@ -28,12 +30,12 @@ const Header = ({ setModal }) => {
   };
 
   return (
-    <header id="header" className="header">
+    <header id="header" className={style.header}>
       <div className="container">
-        <div className="header-content">
+        <div className={style.content}>
           <img className="logo-image" src="/icons/logo.svg" alt="" />
           <nav>
-            <ul className="nav-list">
+            <ul className={style.navlist}>
               <NavLink
                 to="/"
                 style={({ isActive }) => ({
@@ -63,11 +65,11 @@ const Header = ({ setModal }) => {
               </NavLink>
             </ul>
           </nav>
-          <ul className="icons-list">
+          <ul className={style.controls}>
             <li>
               <form
                 autoComplete="off"
-                className="header-form"
+                className={style.form}
                 onSubmit={(e) => handleSubmit(e)}
               >
                 <input placeholder="Search... " type="search" name="search" />

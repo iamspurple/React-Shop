@@ -1,0 +1,58 @@
+@import "../../../style/variables.scss";
+
+.saleProduct {
+  position: relative;
+  padding: 10px;
+  background-color: white;
+  color: black;
+  width: 184px;
+  height: 230px;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  .discount {
+    text-align: center;
+    position: absolute;
+    padding: 0.2em 0.4em;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    width: 3.5em;
+    font-weight: $light;
+    font-size: 12px;
+    top: 1em;
+    left: 0;
+    color: $orange;
+    background-color: $light-orange;
+  }
+
+  & img {
+    align-self: center;
+    width: 150px;
+    aspect-ratio: 1;
+    object-fit: contain;
+  }
+
+  & span {
+    font-weight: $light;
+    font-size: 12px;
+  }
+
+  .price {
+    display: flex;
+    justify-content: space-between;
+
+    .oldPrice {
+      color: $grey;
+      text-decoration: line-through;
+      font-weight: $regular;
+      font-size: 12px;
+    }
+
+    .newPrice {
+      font-weight: $light;
+      font-size: 14px;
+    }
+  }
+}
