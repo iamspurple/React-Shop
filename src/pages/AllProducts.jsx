@@ -1,4 +1,4 @@
-import ProductCard from "../components/ProductCard";
+import ProductCard from "../components/ProductCard/ProductCard";
 import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import SideBar from "../components/SideBar";

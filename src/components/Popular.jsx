@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
-import PopularProduct from "./ProductCard";
+import ProductCard from "./ProductCard/ProductCard";
+import ProductCardSkeleton from "./ProductCard/ProductCardSkeleton";
 
-const Popular = ({ data }) => {
+const Popular = ({ data, isLoading }) => {
   const popular = data?.filter((product) => product.popular).slice(0, 4);
 
   return (
@@ -13,17 +14,27 @@ const Popular = ({ data }) => {
         </Link>
       </div>
       <ul className="popular-list">
-        {popular?.map((prod) => (
-          <Link
-            to={`/products/${prod.id}`}
-            key={prod.id}
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
-            <li>
-              <PopularProduct product={prod} />
-            </li>
-          </Link>
-        ))}
+        {isLoading &&
+          Array(4)
+            .fill(0)
+            .map((item) => (
+              <li key={item}>
+                {" "}
+                <ProductCardSkeleton />
+              </li>
+            ))}
+        {data &&
+          popular?.map((prod) => (
+            <Link
+              to={`/products/${prod.id}`}
+              key={prod.id}
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <li>
+                <ProductCard product={prod} />
+              </li>
+            </Link>
+          ))}
       </ul>
     </section>
   );

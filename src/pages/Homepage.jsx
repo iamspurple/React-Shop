@@ -6,17 +6,17 @@ import Brands from "../components/Brands";
 import Banner from "../components/Banner";
 import Advantages from "../components/Advantages";
 
-const Homepage = ({ data }) => {
+const Homepage = ({ data, isLoading }) => {
   return (
     <>
       <main>
         <div className="container">
           <Hero />
           <CategoriesList />
-          <OnSale data={data} />
+          <OnSale data={data} isLoading={isLoading} />
           <Brands />
           <Banner />
-          <Popular data={data} />
+          <Popular data={data} isLoading={isLoading} />
           <Advantages />
         </div>
       </main>

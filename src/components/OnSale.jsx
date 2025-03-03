@@ -1,11 +1,13 @@
-import SaleProduct from "./SaleProduct";
+import SaleProduct from "./SaleProduct/SaleProduct";
+import SaleProductSkeleton from "./SaleProduct/SaleProductSkeleton";
+
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const OnSale = ({ data }) => {
+const OnSale = ({ data, isLoading }) => {
   const onSaleProducts = data?.filter((product) => product.onSale);
 
   const settings = {
@@ -28,17 +30,26 @@ const OnSale = ({ data }) => {
       </div>
       <div className="slider-container">
         <Slider {...settings}>
-          {onSaleProducts?.map((prod) => (
-            <Link
-              to={`/products/${prod.id}`}
-              key={prod.id}
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
-              <li>
-                <SaleProduct product={prod} />
-              </li>
-            </Link>
-          ))}
+          {isLoading &&
+            Array(6)
+              .fill(0)
+              .map((item) => (
+                <li key={item}>
+                  <SaleProductSkeleton />
+                </li>
+              ))}
+          {data &&
+            onSaleProducts?.map((prod) => (
+              <Link
+                to={`/products/${prod.id}`}
+                key={prod.id}
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                <li>
+                  <SaleProduct product={prod} />
+                </li>
+              </Link>
+            ))}
         </Slider>
       </div>
     </section>

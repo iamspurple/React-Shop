@@ -1,4 +1,4 @@
-import { trimTitle } from "../config";
+import { trimTitle } from "../../config";
 
 const SaleProduct = ({ product }) => {
   return (

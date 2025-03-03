@@ -1280,3 +1280,12 @@ a {
 .slider-container {
   width: 75%;
 }
+
+.skeleton-container {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

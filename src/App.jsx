@@ -12,7 +12,7 @@ import AccountModal from "./pages/AccountModal/AccountModal";
 import { useState } from "react";
 
 function App() {
-  const { data } = useGetProductsQuery();
+  const { data, isLoading } = useGetProductsQuery();
 
   const [modal, setModal] = useState(false);
 
@@ -20,7 +20,10 @@ function App() {
     <>
       <Header setModal={setModal} />
       <Routes>
-        <Route path="/" element={<Homepage data={data} />} />
+        <Route
+          path="/"
+          element={<Homepage data={data} isLoading={isLoading} />}
+        />
         <Route
           path="/products?category=:category"
           element={<AllProducts data={data} />}
