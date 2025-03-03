@@ -6,7 +6,19 @@ import Brands from "../components/Brands";
 import Banner from "../components/Banner";
 import Advantages from "../components/Advantages";
 
-const Homepage = ({ data }) => {
+import { useGetProductsQuery } from "../store/slices/productsApi";
+
+const Homepage = () => {
+  const { data, isLoading } = useGetProductsQuery();
+
+  if (isLoading === true) {
+    return <h1>Loading...</h1>
+  }
+
+  if (isLoading === false && !data) {
+    return null
+  }
+
   return (
     <>
       <main>

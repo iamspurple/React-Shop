@@ -1,56 +1,27 @@
 import { useSearchParams, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import SideBar from "../components/SideBar";
 
 import {
-  useLazyGetProductsByPageQuery,
-  useLazyGetProductsByTitleAndPageQuery,
+  useGetProductsByCategoryAndPageQuery,
 } from "../store/slices/productsApi";
 
 import { ProductsList } from "../components/ProductsList";
 
-const AllProducts = () => {
+const ProductsByCategory = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const pageParam = searchParams.get("page");
-  const searchParam = searchParams.get("search");
-
-  console.log({ searchParam })
 
   const { category } = useParams()
 
   const [currentPage, setCurrentPage] = useState(pageParam ?? 1)
 
-  const [
-    getProductsByPage,
-    {
-      data: products,
-      isLoading: isProductsLoading,
-    }
-  ] = useLazyGetProductsByPageQuery();
-
-  const [
-    getProductsByTitleAndPage,
-    {
-      data: searchData,
-      isLoading: isSearchDataLoading,
-    }
-   ] = useLazyGetProductsByTitleAndPageQuery({ title: searchParam, page: currentPage });
-
-  useEffect(() => {
-    if (!searchParam) {
-      getProductsByPage(currentPage)
-
-      return
-    }
-
-    getProductsByTitleAndPage({ title: searchParam, page: currentPage })
-    
-  }, [currentPage, getProductsByPage, getProductsByTitleAndPage, searchParam])
-
-  const isLoading = isProductsLoading || isSearchDataLoading
-  const data = products || searchData
+  const {
+    data,
+    isLoading,
+  } = useGetProductsByCategoryAndPageQuery({ category, page: currentPage });
 
   if (isLoading === true) {
     return <h1>Loading...</h1>
@@ -64,11 +35,6 @@ const AllProducts = () => {
 
   const paginate = (page) => {
     setCurrentPage(page)
-
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
   }
 
   const handlePage = (page) => {
@@ -115,4 +81,4 @@ const AllProducts = () => {
   );
 };
 
-export default AllProducts;
+export default ProductsByCategory;

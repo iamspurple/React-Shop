@@ -5,14 +5,12 @@ import laptop from "../../public/icons/CategoriesSideBar/laptop.svg";
 import mobile from "../../public/icons/CategoriesSideBar/mobile.svg";
 import tv from "../../public/icons/CategoriesSideBar/tv.svg";
 
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { useGetCategoriesQuery } from "../store/slices/productsApi";
 
-const SideBar = ({ setCurrentPage }) => {
-  const [searchParams] = useSearchParams();
+const SideBar = ({ setCurrentPage, category }) => {
   const goTo = useNavigate();
-  const category = searchParams.get("category");
 
   const CategoryIcons = {
     appliances,
@@ -24,7 +22,8 @@ const SideBar = ({ setCurrentPage }) => {
   };
 
   const handleClick = (cat) => {
-    goTo(`/products?category=${cat}`);
+    goTo(`/products/${cat}`)
+
     setCurrentPage(1);
   };
 

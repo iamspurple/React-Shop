@@ -13,23 +13,33 @@ export const productsApi = createApi({
     getCategories: build.query({
       query: () => "categories",
     }),
+    getProductsByPage: build.query({
+      query: (page) => `products?page=${page}&limit=18`
+    }),
+    getProductsByTitleAndPage: build.query({
+      query: ({ title, page }) => `products?title=*${title}&page=${page}&limit=18`
+    }),
     getProductsByCategory: build.query({
-      query: (category) => `products?category=${category}`,
+      query: (category) => `products?category=${category}`
     }),
-    getProductById: build.query({
-      query: (id) => `products?id=${id}`,
+    getProductsByCategoryAndPage: build.query({
+      query: ({ category, page }) => `products?category=${category}&page=${page}&limit=18`
     }),
-    getProductByTitle: build.query({
-      query: (title) => `products?title=*${title}`,
+    getProductByCategoryAndId: build.query({
+      query: ({ category, id }) => `products?category=${category}&id=${id}`,
     }),
-    //users
   }),
 });
 
 export const {
   useGetProductsQuery,
   useGetCategoriesQuery,
+  useGetProductsByPageQuery,
+  useGetProductsByTitleAndPageQuery,
+  useGetProductsByCategoryAndPageQuery,
   useGetProductsByCategoryQuery,
-  useGetProductByIdQuery,
-  useGetProductByTitleQuery,
+  useGetProductByCategoryAndIdQuery,
+
+  useLazyGetProductsByPageQuery,
+  useLazyGetProductsByTitleAndPageQuery,
 } = productsApi;
