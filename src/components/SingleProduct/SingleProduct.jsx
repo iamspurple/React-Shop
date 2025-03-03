@@ -60,8 +60,10 @@ const SingleProduct = () => {
                   <div className="prices">
                     <span className="single-product-new-price">
                       $
-                      {data?.[0].price -
-                        (data?.[0].price / 100) * data?.[0].discount}
+                      {(
+                        data?.[0].price -
+                        (data?.[0].price / 100) * data?.[0].discount
+                      ).toFixed(2)}
                     </span>
                     <span className="single-product-old-price">
                       last price $ {data?.[0].price}

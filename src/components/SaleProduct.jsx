@@ -8,7 +8,11 @@ const SaleProduct = ({ product }) => {
       <div className="sale-product-price">
         <span className="old-price">$ {product?.price} </span>
         <span className="new-price">
-          ${product?.price - (product?.price / 100) * product?.discount}
+          $
+          {(
+            product?.price -
+            (product?.price / 100) * product?.discount
+          ).toFixed(2)}
         </span>
       </div>
     </div>

@@ -11,7 +11,8 @@ const AllProducts = ({ data }) => {
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
 
-  console.log(location);
+  // console.log(location);
+  // console.log(!location.search.length, location.search.includes("page"));
 
   const category = searchParams.get("category");
   const searchQueryText = searchParams.get("search");
@@ -54,13 +55,13 @@ const AllProducts = ({ data }) => {
 
   const handlePage = (page) => {
     setCurrentPage(page);
-    if (!location.search.length) goTo(`${location.pathname}?page=${page}`);
-    if (location.search.includes("page")) {
-      setSearchParams(searchParams.set("page", { page })); // не работает собака такая
-      goTo(`${location.pathname}${location.search}`);
-    }
+    if (location.search.length == 0) goTo(`${location.pathname}?page=${page}`);
     if (location.search.length && !location.search.includes("page"))
       goTo(`${location.pathname}${location.search}&page=${page}`);
+    if (location.search.includes("page")) {
+      setSearchParams((prev) => prev.set("page", `${page}`));
+      goTo(`${location.pathname}${location.search}`);
+    }
   };
 
   return (
