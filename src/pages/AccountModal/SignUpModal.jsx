@@ -3,9 +3,11 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { app } from "../../firebase";
 import { loginUser } from "../../store/slices/userSlice";
-import Open from "../../../public/icons/open-eye.svg";
-import Closed from "../../../public/icons/closed-eye.svg";
-import Button from "../../../public/icons/close-button.svg";
+import Open from "/icons/open-eye.svg";
+import Closed from "/icons/closed-eye.svg";
+import Button from "/icons/close-button.svg";
+
+import style from "./AccountModal.module.scss";
 
 import { useState } from "react";
 
@@ -37,24 +39,24 @@ const SignUpModal = ({ setOpened, setModal }) => {
   };
 
   return (
-    <div className="modal-wrapper" onClick={(e) => e.stopPropagation()}>
-      <div className="modal-container">
+    <div className={style.wrapper} onClick={(e) => e.stopPropagation()}>
+      <div className={style.container}>
         <button
-          className="close-button"
+          className={style.close}
           onClick={() => setModal(false)}
           type="button"
         >
           <img src={Button} alt="close" />
         </button>
-        <div className="account-form-mode">
-          <div onClick={() => setOpened("login")} className="not-active">
+        <div className={style.mode}>
+          <div onClick={() => setOpened("login")} className={style.not_active}>
             Log In
           </div>
-          <div className="active">Create Account</div>
+          <div className={style.active}>Create Account</div>
         </div>
-        <h2 className="account-form-title">Create your account</h2>
-        <form className="account-form" onSubmit={(e) => e.preventDefault()}>
-          <div className="username">
+        <h2 className={style.title}>Create your account</h2>
+        <form className={style.form} onSubmit={(e) => e.preventDefault()}>
+          <div className={style.username}>
             <input
               required
               className="username"
@@ -66,7 +68,7 @@ const SignUpModal = ({ setOpened, setModal }) => {
               }
             />
           </div>
-          <div className="email">
+          <div className={style.email}>
             <input
               required
               className="email"
@@ -78,7 +80,7 @@ const SignUpModal = ({ setOpened, setModal }) => {
               }
             />
           </div>
-          <div className="password">
+          <div className={style.password}>
             <input
               required
               className="password"
@@ -90,7 +92,7 @@ const SignUpModal = ({ setOpened, setModal }) => {
               }
             />
             <button
-              className="visible"
+              className={style.visible}
               onClick={() => toggleVisible()}
               type="button"
             >
@@ -98,17 +100,17 @@ const SignUpModal = ({ setOpened, setModal }) => {
             </button>
           </div>
           <button
-            className="submit"
+            className={style.submit}
             type="submit"
             onClick={() => handleSignUp(userInfo.email, userInfo.password)}
           >
             Sign Up
           </button>
         </form>
-        <div className="account-form-link">
+        <div className={style.link_container}>
           <span>Already have an account?</span>
 
-          <span onClick={() => setOpened("login")} className="link">
+          <span onClick={() => setOpened("login")} className={style.link}>
             Sign in
           </span>
         </div>

@@ -80,7 +80,7 @@ const Header = ({ setModal }) => {
                 <img src="/icons/bag.svg" alt="cart" />
               </Link>
             </li>
-            <li onClick={() => setModal(true)}>
+            <li style={{ cursor: "pointer" }} onClick={() => setModal(true)}>
               <img src="/icons/profile.svg" alt="login" />
             </li>
           </ul>

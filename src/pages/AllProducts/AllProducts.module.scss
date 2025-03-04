@@ -1,0 +1,40 @@
+@use "../../style/variables.scss" as var;
+
+.container {
+  padding-top: 2em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+
+  .list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: 3em;
+    row-gap: 1em;
+    margin-bottom: 2em;
+  }
+}
+
+.pagination {
+  margin-bottom: 2em;
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+
+  .page {
+    font-weight: var.$light;
+    font-size: 18px;
+    padding: 0.6em 1em;
+
+    &.current {
+      color: var.$light-blue;
+      border-bottom: 1px var.$light-blue solid;
+    }
+  }
+}

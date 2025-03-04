@@ -8,7 +8,7 @@ const SaleProduct = ({ product }) => {
       <img src={product?.image} alt={product?.title} />
       <span>{trimTitle(product?.title)}</span>
       <div className={style.price}>
-        <span className={style.oldPrice}>$ {product?.price} </span>
+        <span className={style.oldPrice}>${product?.price} </span>
         <span className={style.newPrice}>
           $
           {(

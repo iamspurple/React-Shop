@@ -1,0 +1,170 @@
+@use "../../style/variables.scss" as v;
+
+.modal {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  overflow-y: auto;
+  transition: opacity 0.3s;
+  z-index: 1000;
+
+  .wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 600px;
+    height: fit-content;
+    background-color: white;
+    border-radius: 7px;
+    padding: 50px 50px;
+    position: relative;
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 440px;
+
+      .close {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background-color: transparent;
+        cursor: pointer;
+
+        img {
+          width: 30px;
+          aspect-ratio: 1;
+        }
+      }
+
+      .mode {
+        display: flex;
+        flex-direction: row;
+        font-weight: 200;
+        font-size: 20px;
+        justify-content: space-around;
+        width: 100%;
+        text-align: center;
+
+        .active {
+          color: v.$light-blue;
+          border-bottom: 2px v.$light-blue solid;
+          width: 100%;
+          padding-bottom: 0.5em;
+          cursor: pointer;
+        }
+
+        .not_active {
+          color: v.$grey;
+          border-bottom: 2px v.$light-grey solid;
+          width: 100%;
+          padding-bottom: 0.5em;
+          cursor: pointer;
+        }
+      }
+      .form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1em;
+        width: 100%;
+
+        .title {
+          font-weight: 400;
+          font-size: 32px;
+        }
+
+        & div {
+          width: 100%;
+          position: relative;
+        }
+
+        .submit,
+        & input {
+          width: 100%;
+          font-weight: 200;
+          font-size: 16px;
+          line-height: 1.5;
+          border-radius: 7px;
+          padding-block: 0.5em;
+          height: 48px;
+          color: v.$grey;
+        }
+
+        & input {
+          padding-left: 40px;
+          border: 1px #b4b4b4 solid;
+          &::placeholder {
+            color: v.$grey;
+          }
+        }
+
+        & div::before {
+          content: "";
+          position: absolute;
+          width: 1.5em;
+          aspect-ratio: 1;
+          display: inline-block;
+          top: 0.8em;
+          left: 0.6em;
+        }
+
+        .username::before {
+          background: url(../icons/user.svg) center/contain no-repeat;
+        }
+        .email::before {
+          background: url(../icons/sms.svg) center/contain no-repeat;
+        }
+
+        .password::before {
+          background: url(../icons/key.svg) center/contain no-repeat;
+        }
+
+        .visible {
+          background-color: transparent;
+          position: absolute;
+          top: 1em;
+          right: 1em;
+
+          img {
+            width: 1.5em;
+            aspect-ratio: 1;
+          }
+        }
+
+        .submit {
+          background-color: v.$light-blue;
+          color: white;
+          cursor: pointer;
+        }
+      }
+      .link_container {
+        margin-top: 1em;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 1em;
+        color: v.$grey;
+        font-weight: 200;
+        font-size: 16px;
+
+        .link {
+          color: v.$light-blue;
+          font-weight: 300;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

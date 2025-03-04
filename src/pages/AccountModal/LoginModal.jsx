@@ -5,9 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { app } from "../../firebase";
 import { useState } from "react";
 
-import Open from "../../../public/icons/open-eye.svg";
-import Closed from "../../../public/icons/closed-eye.svg";
-import Button from "../../../public/icons/close-button.svg";
+import Open from "/icons/open-eye.svg";
+import Closed from "/icons/closed-eye.svg";
+import Button from "/icons/close-button.svg";
+
+import style from "./AccountModal.module.scss";
 
 const LoginModal = ({ setOpened, setModal }) => {
   const [email, setEmail] = useState("");
@@ -34,24 +36,24 @@ const LoginModal = ({ setOpened, setModal }) => {
   };
 
   return (
-    <div className="modal-wrapper " onClick={(e) => e.stopPropagation()}>
-      <div className="modal-container">
+    <div className={style.wrapper} onClick={(e) => e.stopPropagation()}>
+      <div className={style.container}>
         <button
-          className="close-button"
+          className={style.close}
           onClick={() => setModal(false)}
           type="button"
         >
           <img src={Button} alt="close" />
         </button>
-        <div className="account-form-mode">
-          <div className="active">Log In</div>
-          <div onClick={() => setOpened("signup")} className="not-active">
+        <div className={style.mode}>
+          <div className={style.active}>Log In</div>
+          <div onClick={() => setOpened("signup")} className={style.not_active}>
             Create Account
           </div>
         </div>
-        <h2 className="account-form-title">Log in to Tech Heim</h2>
-        <form className="account-form" onSubmit={(e) => e.preventDefault()}>
-          <div className="email">
+        <h2 className={style.title}>Log in to Tech Heim</h2>
+        <form className={style.form} onSubmit={(e) => e.preventDefault()}>
+          <div className={style.email}>
             <input
               required
               type="email"
@@ -60,7 +62,7 @@ const LoginModal = ({ setOpened, setModal }) => {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <div className="password">
+          <div className={style.password}>
             <input
               required
               type={visible ? "text" : "password"}
@@ -69,7 +71,7 @@ const LoginModal = ({ setOpened, setModal }) => {
               onChange={(e) => setPassword(e.target.value)}
             />
             <button
-              className="visible"
+              className={style.visible}
               onClick={() => toggleVisible()}
               type="button"
             >
@@ -78,17 +80,17 @@ const LoginModal = ({ setOpened, setModal }) => {
           </div>
 
           <button
-            className="submit"
+            className={style.submit}
             type="submit"
             onClick={() => handleLogin(email, password)}
           >
             Log In
           </button>
         </form>
-        <div className="account-form-link">
+        <div className={style.link_container}>
           <span> Don&apos;t have an account?</span>
 
-          <span onClick={() => setOpened("signup")} className="link">
+          <span onClick={() => setOpened("signup")} className={style.link}>
             Sign up
           </span>
         </div>

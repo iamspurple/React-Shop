@@ -1,0 +1,36 @@
+@use "../../style/variables.scss" as v;
+
+.sidebar {
+  max-width: 280px;
+  height: fit-content;
+  position: sticky;
+  top: 0;
+
+  .title {
+    font-weight: v.$medium;
+    font-size: 20px;
+  }
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    .item {
+      padding-inline: 10px;
+      padding-block: 5px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      font-weight: v.$light;
+      font-size: 20px;
+
+      &.active {
+        border-radius: 10px;
+        box-shadow: inset 0px 0px 12px -2px rgba(45, 45, 45, 0.3);
+      }
+    }
+  }
+}

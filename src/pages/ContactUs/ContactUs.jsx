@@ -1,25 +1,27 @@
-import { contacts } from "../config";
+import { contacts } from "../../config";
+
+import style from "./ContactUs.module.scss";
 
 const ContactUs = () => {
   return (
     <div className="container">
-      <div className="contact-us">
-        <ul className="contact-list">
-          <li className="contact-item office">
+      <div className={style.contact_us}>
+        <ul className={style.list}>
+          <li className={`${style.item} ${style.office}`}>
             <h3>Office</h3>
             <span>{contacts.address}</span>
           </li>
-          <li className="contact-item email">
+          <li className={`${style.item} ${style.email}`}>
             <h3>E-mail</h3>
             <span>{contacts.email}</span>
           </li>
-          <li className="contact-item phone">
+          <li className={`${style.item} ${style.phone}`}>
             <h3>Phone</h3>
             <span>{contacts.phone}</span>
           </li>
         </ul>
-        <div className="form-container">
-          <div className="form-message">
+        <div className={style.container}>
+          <div className={style.message}>
             <h2>Message us</h2>
             <p>
               We&apos;re here to assist you every step of the way. Whether you
@@ -28,10 +30,10 @@ const ContactUs = () => {
               prompt assistance.
             </p>
           </div>
-          <form className="contact-form">
+          <form className={style.form}>
             <input type="text" placeholder="* Your name" />
             <input type="email" placeholder="* E-mail" />
-            <textarea placeholder="Message" className="text-area"></textarea>
+            <textarea placeholder="Message"></textarea>
             <button type="submit">Submit</button>
           </form>
         </div>

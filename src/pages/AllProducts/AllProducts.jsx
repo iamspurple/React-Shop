@@ -1,9 +1,11 @@
-import ProductCard from "../components/ProductCard/ProductCard";
+import ProductCard from "../../components/ProductCard/ProductCard";
 import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
-import SideBar from "../components/SideBar";
-import ScrollToTop from "../config";
+import SideBar from "../../components/SideBar/SideBar";
+import ScrollToTop from "../../config";
 import { useLocation } from "react-router-dom";
+
+import style from "./AllProducts.module.scss";
 
 const AllProducts = ({ data }) => {
   ScrollToTop();
@@ -66,9 +68,9 @@ const AllProducts = ({ data }) => {
 
   return (
     <div className="container">
-      <div className="products-container">
+      <div className={style.container}>
         <SideBar setCurrentPage={setCurrentPage} />
-        <ul className="all-products">
+        <ul className={style.list}>
           {(pages().length > 1
             ? filtered.slice(firstIndex, lastIndex)
             : filtered
@@ -86,15 +88,15 @@ const AllProducts = ({ data }) => {
         </ul>
       </div>
       {pages().length > 1 ? (
-        <ul className="pagination">
+        <ul className={style.pagination}>
           {pages().map((page) => (
             <li
               onClick={() => handlePage(page)}
               key={page}
               className={
                 currentPage == page
-                  ? "pagination-item current"
-                  : "pagination-item"
+                  ? `${style.page} ${style.current}`
+                  : style.page
               }
             >
               {page}
