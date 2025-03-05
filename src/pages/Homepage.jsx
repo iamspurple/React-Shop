@@ -5,8 +5,10 @@ import Popular from "../components/Popular/Popular";
 import Brands from "../components/Brands/Brands";
 import Banner from "../components/Banner/Banner";
 import Advantages from "../components/Advantages/Advantages";
+import { useGetProductsQuery } from "../store/slices/productsApi";
+const Homepage = () => {
+  const { data, isLoading } = useGetProductsQuery();
 
-const Homepage = ({ data, isLoading }) => {
   return (
     <>
       <main>

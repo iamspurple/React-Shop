@@ -1,14 +1,19 @@
 import { useParams } from "react-router-dom";
-import { useGetProductByIdQuery } from "../../store/slices/productsApi";
+import { useGetProductByCategoryAndIdQuery } from "../../store/slices/productsApi";
 import Similar from "./Similar";
 import ScrollToTop from "../../config";
 import SingleProductCard from "./SingleProductCard";
 import SkeletonCard from "./SingleProductCardSkeleton";
 
 const SingleProduct = () => {
-  const params = useParams();
+  const { category, id } = useParams();
 
-  const { data, isLoading } = useGetProductByIdQuery(params.id);
+  const { data, isLoading } = useGetProductByCategoryAndIdQuery({
+    category,
+    id,
+  });
+
+  console.log(data);
 
   ScrollToTop();
 

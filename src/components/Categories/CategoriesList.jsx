@@ -40,7 +40,7 @@ const CategoriesList = () => {
             ))}
         {data &&
           data?.map((cat) => (
-            <Link key={cat} to={`products?category=${cat}`}>
+            <Link key={cat} to={`products/${cat}`}>
               <li className={style.card}>
                 <img src={CategoryImages[cat]} alt={cat} />
                 <span>{cat}</span>

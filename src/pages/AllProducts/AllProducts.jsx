@@ -1,107 +1,141 @@
-import ProductCard from "../../components/ProductCard/ProductCard";
-import { Link, useSearchParams, useNavigate } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import SideBar from "../../components/SideBar/SideBar";
-import ScrollToTop from "../../config";
-import { useLocation } from "react-router-dom";
+
+import {
+  useLazyGetProductsByPageQuery,
+  useLazyGetProductsByTitleAndPageQuery,
+  useLazyGetProductsByPropAndPageQuery,
+} from "../../store/slices/productsApi";
 
 import style from "./AllProducts.module.scss";
+import ProductsList from "./ProductsList";
 
-const AllProducts = ({ data }) => {
-  ScrollToTop();
-
-  const location = useLocation();
+const AllProducts = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const params = useParams();
 
-  // console.log(location);
-  // console.log(!location.search.length, location.search.includes("page"));
+  const propParam = params.prop;
+  const titleParam = searchParams.get("search");
+  const pageParam = searchParams.get("page");
 
-  const category = searchParams.get("category");
-  const searchQueryText = searchParams.get("search");
-  const sortQuery = searchParams.get("sort");
+  console.log(titleParam);
 
-  const filtered = useMemo(() => {
-    if (!searchQueryText && !category && !sortQuery) return data;
+  const [currentPage, setCurrentPage] = useState(pageParam ?? 1);
 
-    if (searchQueryText)
-      return data?.filter((prod) =>
-        prod.title.toLowerCase().includes(searchQueryText.toLowerCase())
-      );
+  const [getProductsByPage, { data: products, isLoading: isProductsLoading }] =
+    useLazyGetProductsByPageQuery();
 
-    if (category) return data?.filter((prod) => prod.category === category);
+  const [
+    getProductsByProp,
+    { data: productsByProp, isLoading: isProductsByPropLoading },
+  ] = useLazyGetProductsByPropAndPageQuery();
 
-    if (sortQuery) return data?.filter((prod) => prod[sortQuery]);
-  }, [data, searchQueryText, sortQuery, category]);
-
-  //pagination
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageQuant, setPageQuant] = useState();
+  const [
+    getProductsByTitle,
+    { data: productsByTitle, isLoading: isProductsByTitleLoading },
+  ] = useLazyGetProductsByTitleAndPageQuery();
 
   useEffect(() => {
-    setPageQuant(Math.ceil(filtered?.length / 18));
-  }, [filtered?.length]);
-
-  const pages = () => {
-    const result = [];
-    for (let i = 1; i <= pageQuant; i++) {
-      result.push(`${i}`);
+    if (!propParam && !titleParam) {
+      getProductsByPage({ page: currentPage });
+      console.log("Запрос");
+      return;
     }
-    return result;
-  };
 
-  const lastIndex = currentPage * 18;
-  const firstIndex = lastIndex - 18;
+    if (titleParam) {
+      getProductsByTitle({ title: titleParam, page: currentPage });
+      console.log("Запрос по названию", titleParam);
+      return;
+    }
 
-  const goTo = useNavigate();
+    if (propParam) {
+      getProductsByProp({ prop: propParam, page: currentPage });
+    }
+  }, [
+    currentPage,
+    propParam,
+    titleParam,
+    getProductsByProp,
+    getProductsByPage,
+    getProductsByTitle,
+  ]);
+
+  console.log(productsByTitle);
+
+  const data = useMemo(() => {
+    if (!propParam && !titleParam) {
+      return products;
+    }
+
+    if (titleParam) {
+      return productsByTitle;
+    }
+
+    if (propParam) {
+      return productsByProp;
+    }
+  }, [propParam, titleParam, products, productsByTitle, productsByProp]);
+
+  const isLoading =
+    isProductsByPropLoading || isProductsLoading || isProductsByTitleLoading;
+
+  if (isLoading === true) {
+    return (
+      <div className="container">
+        <div className={style.container}>
+          <SideBar setCurrentPage={setCurrentPage} />
+          <ProductsList isLoading={isLoading} />
+        </div>
+      </div>
+    );
+  }
+
+  if (isLoading === false && !data?.items) {
+    return null;
+  }
+
+  const {
+    items,
+    meta: { total_pages },
+  } = data;
 
   const handlePage = (page) => {
     setCurrentPage(page);
-    if (location.search.length == 0) goTo(`${location.pathname}?page=${page}`);
-    if (location.search.length && !location.search.includes("page"))
-      goTo(`${location.pathname}${location.search}&page=${page}`);
-    if (location.search.includes("page")) {
-      setSearchParams((prev) => prev.set("page", `${page}`));
-      goTo(`${location.pathname}${location.search}`);
-    }
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+    setSearchParams({ page });
   };
 
   return (
     <div className="container">
       <div className={style.container}>
         <SideBar setCurrentPage={setCurrentPage} />
-        <ul className={style.list}>
-          {(pages().length > 1
-            ? filtered.slice(firstIndex, lastIndex)
-            : filtered
-          )?.map((prod) => (
-            <Link
-              style={{ textDecoration: "none", color: "inherit" }}
-              key={prod.id}
-              to={`/products/${prod.id}`}
-            >
-              <li>
-                <ProductCard product={prod} />
-              </li>
-            </Link>
-          ))}
-        </ul>
+        <ProductsList items={items} isLoading={isLoading} />
       </div>
-      {pages().length > 1 ? (
+      {total_pages > 1 ? (
         <ul className={style.pagination}>
-          {pages().map((page) => (
-            <li
-              onClick={() => handlePage(page)}
-              key={page}
-              className={
-                currentPage == page
-                  ? `${style.page} ${style.current}`
-                  : style.page
-              }
-            >
-              {page}
-            </li>
-          ))}
+          {Array(total_pages)
+            .fill(1)
+            .map((n, index) => {
+              const page = index + 1;
+
+              return (
+                <li
+                  onClick={() => handlePage(page)}
+                  key={page}
+                  className={
+                    currentPage == page
+                      ? `${style.page} ${style.current}`
+                      : style.page
+                  }
+                >
+                  {page}
+                </li>
+              );
+            })}
         </ul>
       ) : null}
     </div>

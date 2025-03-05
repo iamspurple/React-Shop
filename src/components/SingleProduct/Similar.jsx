@@ -3,6 +3,8 @@ import ProductCard from "../ProductCard/ProductCard";
 import ProductCardSkeleton from "../ProductCard/ProductCardSkeleton";
 import { Link } from "react-router-dom";
 
+import style from "./SingleProduct.module.scss";
+
 const Similar = ({ category, id, brand }) => {
   const { data, isLoading } = useGetProductsByCategoryQuery(category);
 
@@ -12,14 +14,14 @@ const Similar = ({ category, id, brand }) => {
   const similar = similarBrand?.concat(similarCat).slice(0, 4);
 
   return (
-    <div className="similar">
-      <h2 className="similar-title">Similar Products</h2>
-      <ul className="similar-list">
+    <div className={style.similar}>
+      <h2 className={style.title}>Similar Products</h2>
+      <ul className={style.list}>
         {isLoading &&
           Array(4)
             .fill(0)
-            .map((item) => (
-              <li key={item}>
+            .map((item, index) => (
+              <li key={index}>
                 <ProductCardSkeleton />
               </li>
             ))}
@@ -28,7 +30,7 @@ const Similar = ({ category, id, brand }) => {
             <Link
               style={{ textDecoration: "none", color: "inherit" }}
               key={prod.id}
-              to={`/products/${prod.id}`}
+              to={`/products/${prod.category}/${prod.id}`}
             >
               <li>
                 <ProductCard product={prod} />

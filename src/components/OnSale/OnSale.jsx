@@ -23,7 +23,7 @@ const OnSale = ({ data, isLoading }) => {
         <h3 className={style.title}>Products On Sale</h3>
         <span>Shop Now!</span>
         <Link
-          to={"/products?sort=onSale"}
+          to={"/products/special/onSale"}
           style={{ textDecoration: "none", color: "inherit" }}
         >
           <span className={style.link}>View all</span>

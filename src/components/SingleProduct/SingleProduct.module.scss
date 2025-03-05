@@ -1,0 +1,228 @@
+@use "../../style/variables.scss" as v;
+
+.single_product {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-block: 20px;
+
+  .image {
+    & img {
+      width: 500px;
+      aspect-ratio: 1;
+      object-fit: contain;
+    }
+
+    .icons {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      & img {
+        width: 25px;
+        aspect-ratio: 1;
+        object-fit: contain;
+      }
+
+      & button {
+        background-color: transparent;
+        cursor: pointer;
+        border-radius: 7px;
+        color: #717171;
+        font-weight: 300;
+        font-size: 18px;
+        transition: 0.3s;
+        padding-block: 5px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        &:hover {
+          background-color: #e6e6e6;
+          color: #0c68f4;
+        }
+      }
+    }
+  }
+
+  .details {
+    max-width: 350px;
+
+    .title {
+      font-weight: 400;
+      font-size: 20px;
+      margin-top: 0;
+    }
+
+    .rating {
+      display: inline-flex;
+      align-items: center;
+      font-weight: 400;
+      font-size: 12px;
+      background-color: v.$blue;
+      color: white;
+      padding: 0.4em 0.4em 0.4em 0.3em;
+      border-radius: 4px;
+      position: relative;
+
+      &::before {
+        content: "";
+        width: 1.3em;
+        padding-right: 5px;
+        aspect-ratio: 1;
+        background: url(../../../icons/Star-white.svg) center/contain no-repeat;
+      }
+    }
+
+    .description {
+      font-weight: 200;
+      font-size: 14px;
+    }
+
+    .table {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 2;
+
+      &tr td:first-child {
+        color: v.$grey;
+        display: inline-flex;
+        align-items: center;
+        padding-right: 3em;
+
+        &::before {
+          content: " ";
+          display: inline-block;
+          margin-right: 5px;
+          width: 4px;
+          aspect-ratio: 1;
+          border-radius: 50%;
+          background-color: v.$grey;
+        }
+      }
+    }
+  }
+
+  .purchase {
+    padding: 1em;
+    max-width: 320px;
+    max-height: fit-content;
+    border-radius: 7px;
+    box-shadow: v.$shadow;
+
+    .price {
+      font-weight: 400;
+      font-size: 32px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-bottom: 0.5em;
+      align-items: flex-start;
+
+      .prices {
+        display: flex;
+        flex-direction: column;
+
+        .old_price {
+          font-weight: 200;
+          font-size: 14px;
+          color: v.$grey;
+        }
+      }
+      .discount {
+        font-weight: 400;
+        font-size: 16px;
+        color: v.$orange;
+        display: inline-flex;
+        align-items: center;
+
+        &::before {
+          content: "";
+          display: inline-block;
+          width: 1.5em;
+          padding-right: 5px;
+          aspect-ratio: 1;
+          background: url(../../../icons/discount-shape.svg) center/contain
+            no-repeat;
+        }
+      }
+    }
+
+    .buttons {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      & button {
+        font-weight: 300;
+        font-size: 16px;
+        padding: 1em 4em;
+        color: #0c68f4;
+        border: 2px #0c68f4 solid;
+        border-radius: 7px;
+        width: 264px;
+        background-color: transparent;
+        cursor: pointer;
+        margin-bottom: 1em;
+      }
+
+      .blue {
+        color: white;
+        background-color: #0c68f4;
+      }
+    }
+  }
+
+  & div {
+    .advantages {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      gap: 2em;
+      margin-block: 2em;
+
+      & li {
+        display: inline-flex;
+        align-items: center;
+        font-weight: 400;
+        font-size: 12px;
+        color: v.$grey;
+
+        &::before {
+          content: "";
+          width: 1.5em;
+          aspect-ratio: 1;
+          padding-right: 7px;
+        }
+      }
+
+      .in_stock::before {
+        background: url(../../../icons/shop.svg) center/contain no-repeat;
+      }
+
+      .guaranteed::before {
+        background: url(../../../icons/verify.svg) center/contain no-repeat;
+      }
+
+      .delivery::before {
+        background: url(../../../icons/truck.svg) center/contain no-repeat;
+      }
+    }
+  }
+}
+
+.similar {
+  .title {
+    font-weight: 400;
+    font-size: 20px;
+  }
+
+  .list {
+    margin-block: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}

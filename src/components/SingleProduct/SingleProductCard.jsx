@@ -1,26 +1,31 @@
+import style from "./SingleProduct.module.scss";
+
+import Like from "/icons/heart.svg";
+import Share from "/icons/directbox-send.svg";
+
 const SingleProductCard = ({ data }) => {
   return (
-    <div className="single-product">
-      <div className="single-product-image">
+    <div className={style.single_product}>
+      <div className={style.image}>
         <img src={data?.image} alt={data?.title} />
-        <div className="single-product-icons">
+        <div className={style.icons}>
           <button className="like">
-            <img src="../icons/heart.svg" alt="like" />
+            <img src={Like} alt="like" />
             Add to Favorites
           </button>
           <button className="share">
-            <img src="../icons/directbox-send.svg" alt="share" />
+            <img src={Share} alt="share" />
             Share
           </button>
         </div>
       </div>
-      <div className="single-product-details">
-        <h1 className="single-product-title">{data?.title}</h1>
-        <span className="single-product-rating">{`4.${Math.random()
+      <div className={style.details}>
+        <h1 className={style.title}>{data?.title}</h1>
+        <span className={style.rating}>{`4.${Math.random()
           .toString()
           .split(".")[1]
           .substring(0, 1)}`}</span>
-        <p className="single-product-descr">{data?.description}</p>
+        <p className={style.description}>{data?.description}</p>
         <table>
           <tbody>
             <tr>
@@ -41,11 +46,11 @@ const SingleProductCard = ({ data }) => {
         </table>
       </div>
       <div>
-        <div className="single-product-purchase">
-          <div className="single-product-price">
+        <div className={style.purchase}>
+          <div className={style.price}>
             {data?.onSale ? (
               <>
-                <div className="prices">
+                <div className={style.prices}>
                   <span className="single-product-new-price">
                     $
                     {(
@@ -53,32 +58,30 @@ const SingleProductCard = ({ data }) => {
                       (data?.price / 100) * data?.discount
                     ).toFixed(2)}
                   </span>
-                  <span className="single-product-old-price">
+                  <span className={style.old_price}>
                     last price ${data?.price}
                   </span>
                 </div>
-                <span className="single-product-discount">
-                  -{data?.discount}%
-                </span>
+                <span className={style.discount}>-{data?.discount}%</span>
               </>
             ) : (
               `$ ${data?.price}`
             )}
           </div>
-          <div className="single-product-buttons">
-            <button>Buy Now</button>
+          <div className={style.buttons}>
+            <button className={style.blue}>Buy Now</button>
             <button>Add to cart</button>
           </div>
         </div>
-        <ul className="single-product-advantages">
-          <li className="in-stock">In Stock</li>
-          <li className="guaranteed">Guaranteed</li>
+        <ul className={style.advantages}>
+          <li className={style.in_stock}>In Stock</li>
+          <li className={style.guaranteed}>Guaranteed</li>
           {!data?.onSale && data?.price > 1000 && (
-            <li className="delivery">Free Delivery</li>
+            <li className={style.delivery}>Free Delivery</li>
           )}
           {data?.onSale &&
             data?.price - (data?.price / 100) * data?.discount > 1000 && (
-              <li className="delivery">Free Delivery</li>
+              <li className={style.delivery}>Free Delivery</li>
             )}
         </ul>
       </div>

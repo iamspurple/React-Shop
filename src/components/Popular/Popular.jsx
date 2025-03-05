@@ -10,7 +10,7 @@ const Popular = ({ data, isLoading }) => {
     <section className="popular">
       <div className={style.header}>
         <h2 className={style.title}>Popular Products</h2>
-        <Link to="/products?sort=popular" className={style.link}>
+        <Link to="/products/special/popular" className={style.link}>
           View all
         </Link>
       </div>
