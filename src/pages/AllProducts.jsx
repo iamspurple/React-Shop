@@ -14,18 +14,16 @@ const AllProducts = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const pageParam = searchParams.get("page");
-  const searchParam = searchParams.get("search");
-
-  console.log({ searchParam })
 
   const { category } = useParams()
 
-  const [currentPage, setCurrentPage] = useState(pageParam ?? 1)
+  const [currentPage, setCurrentPage] = useState(pageParam)
+
+  const [data, setData] = useState(null)
 
   const [
     getProductsByPage,
     {
-      data: products,
       isLoading: isProductsLoading,
     }
   ] = useLazyGetProductsByPageQuery();
@@ -33,24 +31,37 @@ const AllProducts = () => {
   const [
     getProductsByTitleAndPage,
     {
-      data: searchData,
       isLoading: isSearchDataLoading,
     }
-   ] = useLazyGetProductsByTitleAndPageQuery({ title: searchParam, page: currentPage });
+   ] = useLazyGetProductsByTitleAndPageQuery();
+
+   useEffect(() => {
+    if (!pageParam) {
+      setCurrentPage(1)
+    }
+   }, [pageParam])
+
+   useEffect(() => {
+    const searchParam = searchParams.get("search");
+
+    if (!searchParam) {
+      getProductsByPage(currentPage).then((res) => {
+        setData(res.data)
+      })
+    }
+  }, [currentPage, getProductsByPage, searchParams])
 
   useEffect(() => {
-    if (!searchParam) {
-      getProductsByPage(currentPage)
+    const searchParam = searchParams.get("search");
 
-      return
+    if (searchParam) {
+      getProductsByTitleAndPage({ title: searchParam, page: currentPage }).then((res) => {
+        setData(res.data)
+      })
     }
-
-    getProductsByTitleAndPage({ title: searchParam, page: currentPage })
-    
-  }, [currentPage, getProductsByPage, getProductsByTitleAndPage, searchParam])
+  }, [currentPage, getProductsByTitleAndPage, searchParams])
 
   const isLoading = isProductsLoading || isSearchDataLoading
-  const data = products || searchData
 
   if (isLoading === true) {
     return <h1>Loading...</h1>
@@ -63,6 +74,14 @@ const AllProducts = () => {
   const { items, meta: { total_pages } } = data
 
   const paginate = (page) => {
+    const searchParam = searchParams.get("search");
+
+    if (searchParam) {
+      setSearchParams({ search: searchParam, page })
+    } else {
+      setSearchParams({ page })
+    }
+
     setCurrentPage(page)
 
     window.scrollTo({
@@ -70,10 +89,6 @@ const AllProducts = () => {
       behavior: "smooth",
     });
   }
-
-  const handlePage = (page) => {
-    setSearchParams({ page })
-  };
 
   return (
     <div className="container">
@@ -93,11 +108,7 @@ const AllProducts = () => {
 
             return (
               <li
-                onClick={() => {
-                  paginate(page)
-
-                  handlePage(page)
-                }}
+                onClick={() => paginate(page)}
                 key={page}
                 className={
                   currentPage == page
