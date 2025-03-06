@@ -19,12 +19,23 @@ const Header = ({ setModal }) => {
     const text = e.target["search"].value;
 
     if (text) {
-      location.pathname === "/products"
-        ? setSearchParams({ search: text })
-        : goTo(`/products?search=${text}`);
-      return;
+      const params = new URLSearchParams();
+
+      params.set("search", text);
+
+      if (location !== '/products') {
+        goTo('products');
+      }
+
+      setSearchParams(params, {
+        preventScrollReset: true,
+      });
+
+      return
     }
-    setSearchParams();
+    
+
+    goTo('products');
   };
 
   return (
