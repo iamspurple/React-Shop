@@ -27,7 +27,7 @@ const Banner = () => {
           <img className={style.ps} src="../images/ps55.png" alt="ps5" />
           <button
             type="button"
-            onClick={() => goTo("/products/27")}
+            onClick={() => goTo("/products/gaming/27")}
             className={style.button}
           >
             Buy Now

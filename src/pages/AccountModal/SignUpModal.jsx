@@ -1,8 +1,6 @@
-import { useDispatch } from "react-redux";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
 import { app } from "../../firebase";
-import { loginUser } from "../../store/slices/userSlice";
+
 import Open from "/icons/open-eye.svg";
 import Closed from "/icons/closed-eye.svg";
 import Button from "/icons/close-button.svg";
@@ -10,8 +8,11 @@ import Button from "/icons/close-button.svg";
 import style from "./AccountModal.module.scss";
 
 import { useState } from "react";
+import { useCreateNewUserMutation } from "../../store/slices/productsApi";
 
 const SignUpModal = ({ setOpened, setModal }) => {
+  const [createNewUser] = useCreateNewUserMutation();
+
   const [visible, setVisible] = useState(false);
 
   const toggleVisible = () => {
@@ -24,18 +25,27 @@ const SignUpModal = ({ setOpened, setModal }) => {
     name: "",
   });
 
-  const dispatch = useDispatch();
-
-  const goTo = useNavigate();
-
-  const handleSignUp = (email, password) => {
+  const handleSignUp = (name, email, password) => {
     const auth = getAuth(app);
     createUserWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
-        dispatch(loginUser({ email: user.email, id: user.uid }));
-        goTo("/login");
+        console.log(user);
+        createNewUser({
+          name,
+          password,
+          uid: user.uid,
+          favorites: [],
+          cart: [],
+        });
+        setOpened("signup-okay");
+        setTimeout(() => {
+          setOpened("login");
+        }, 2000);
       })
-      .catch(console.error);
+      .catch((error) => {
+        console.error(error);
+        setOpened("signup-error");
+      });
   };
 
   return (
@@ -102,7 +112,9 @@ const SignUpModal = ({ setOpened, setModal }) => {
           <button
             className={style.submit}
             type="submit"
-            onClick={() => handleSignUp(userInfo.email, userInfo.password)}
+            onClick={() =>
+              handleSignUp(userInfo.name, userInfo.email, userInfo.password)
+            }
           >
             Sign Up
           </button>

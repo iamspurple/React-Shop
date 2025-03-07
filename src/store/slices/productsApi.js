@@ -34,10 +34,28 @@ export const productsApi = createApi({
       query: ({ prop, page }) => `products?${prop}=true&page=${page}&limit=18`,
     }),
     //users
+    createNewUser: build.mutation({
+      query: (body) => ({
+        url: "users",
+        method: "POST",
+        body,
+      }),
+    }),
+    getUserInfo: build.query({
+      query: (uid) => `users?uid=${uid}`,
+    }),
+    updateUserInfo: build.mutation({
+      query: ({ uid, ...patch }) => ({
+        url: `users?uid=${uid}`,
+        method: "PATCH",
+        body: patch,
+      }),
+    }),
   }),
 });
 
 export const {
+  //products
   useGetProductsQuery,
   useGetCategoriesQuery,
   useGetProductsByCategoryQuery,
@@ -46,4 +64,7 @@ export const {
   useLazyGetProductsByPropAndPageQuery,
   useGetProductByCategoryAndIdQuery,
   useGetProductsByCategoryAndPageQuery,
+  //users
+  useCreateNewUserMutation,
+  useLazyGetUserInfoQuery,
 } = productsApi;

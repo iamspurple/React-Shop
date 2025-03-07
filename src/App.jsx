@@ -11,10 +11,12 @@ import ContactUs from "./pages/ContactUs/ContactUs";
 import AccountModal from "./pages/AccountModal/AccountModal";
 import { useState } from "react";
 import ProductsByCategory from "./pages/AllProducts/ProductsByCategory";
+import { useLazyGetUserInfoQuery } from "./store/slices/productsApi";
 
 function App() {
   const [modal, setModal] = useState(false);
-
+  const [getUserInfo, { data, isLoading }] = useLazyGetUserInfoQuery();
+  console.log(data, isLoading);
   return (
     <>
       <Header setModal={setModal} />
@@ -26,11 +28,12 @@ function App() {
         <Route path="/products/special/:prop" element={<AllProducts />} />
         <Route path="/products/:category/:id" element={<SingleProduct />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/register" element={<AccountModal />} />
         <Route path="/contact" element={<ContactUs />} />
       </Routes>
       <Footer />
-      {modal ? <AccountModal setModal={setModal} /> : null}
+      {modal ? (
+        <AccountModal getUserInfo={getUserInfo} setModal={setModal} />
+      ) : null}
     </>
   );
 }

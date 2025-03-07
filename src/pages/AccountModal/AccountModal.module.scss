@@ -15,6 +15,53 @@
   transition: opacity 0.3s;
   z-index: 1000;
 
+  .message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 450px;
+    background-color: white;
+    border-radius: 7px;
+    padding: 50px;
+    position: relative;
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+
+      .image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 120px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        box-shadow: v.$shadow;
+        margin-bottom: 1em;
+      }
+
+      .title {
+        color: #146c43;
+        font-size: 32px;
+        font-weight: 400;
+        margin: 0;
+
+        &.error {
+          color: #c91433;
+        }
+      }
+
+      .description {
+        color: #505050;
+        font-size: 18px;
+        font-weight: 200;
+        text-align: center;
+      }
+    }
+  }
+
   .wrapper {
     display: flex;
     justify-content: center;

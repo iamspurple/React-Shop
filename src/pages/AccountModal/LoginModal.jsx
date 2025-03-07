@@ -1,7 +1,4 @@
-import { useDispatch } from "react-redux";
-import { loginUser } from "../../store/slices/userSlice";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
 import { app } from "../../firebase";
 import { useState } from "react";
 
@@ -11,7 +8,7 @@ import Button from "/icons/close-button.svg";
 
 import style from "./AccountModal.module.scss";
 
-const LoginModal = ({ setOpened, setModal }) => {
+const LoginModal = ({ getUserInfo, setOpened, setModal }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -21,18 +18,23 @@ const LoginModal = ({ setOpened, setModal }) => {
     setVisible(!visible);
   };
 
-  const dispatch = useDispatch();
-
-  const goTo = useNavigate();
-
   const handleLogin = (email, password) => {
     const auth = getAuth(app);
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
-        dispatch(loginUser({ email: user.email, id: user.uid }));
-        goTo("/login");
+        getUserInfo(user.uid);
+        setOpened("login-okay");
+        setTimeout(() => {
+          setModal(false);
+        }, 2000);
       })
-      .catch(console.error);
+      .catch((error) => {
+        console.error(error);
+        setOpened("login-error");
+        setTimeout(() => {
+          setModal(false);
+        }, 2000);
+      });
   };
 
   return (
