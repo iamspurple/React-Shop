@@ -6,9 +6,11 @@ import {
   NavLink,
 } from "react-router-dom";
 
+import signout from "/icons/signout.svg";
+
 import style from "./Header.module.scss";
 
-const Header = ({ setModal }) => {
+const Header = ({ auth, isAuth, setIsAuth, data, setModal }) => {
   const location = useLocation();
 
   const goTo = useNavigate();
@@ -21,12 +23,21 @@ const Header = ({ setModal }) => {
     const text = e.target["search"].value;
 
     if (text) {
-      location.pathname === "/products"
-        ? setSearchParams({ search: text })
-        : goTo(`/products?search=${text}`);
+      const params = new URLSearchParams();
+
+      params.set("search", text);
+
+      if (location !== "/products") {
+        goTo("products");
+      }
+
+      setSearchParams(params, {
+        preventScrollReset: true,
+      });
+
       return;
     }
-    setSearchParams();
+    goTo("products");
   };
 
   return (
@@ -80,9 +91,28 @@ const Header = ({ setModal }) => {
                 <img src="/icons/bag.svg" alt="cart" />
               </Link>
             </li>
-            <li style={{ cursor: "pointer" }} onClick={() => setModal(true)}>
-              <img src="/icons/profile.svg" alt="login" />
-            </li>
+            {!isAuth && (
+              <li style={{ cursor: "pointer" }} onClick={() => setModal(true)}>
+                <img src="/icons/profile.svg" alt="login" />
+              </li>
+            )}
+            {isAuth && data && (
+              <>
+                <li className={style.account}>
+                  <span> {data?.[0].name}</span>
+                </li>
+                <li className={style.account}>
+                  <button
+                    onClick={() => {
+                      auth.signOut();
+                      setIsAuth(null);
+                    }}
+                  >
+                    <img src={signout} alt="sign out" />{" "}
+                  </button>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>
