@@ -38,7 +38,7 @@ const OnSale = ({ data, isLoading }) => {
           {data &&
             onSaleProducts?.map((prod) => (
               <Link
-                to={`/products/${prod.id}`}
+                to={`/products/${prod.category}/${prod.id}`}
                 key={prod.id}
                 style={{ textDecoration: "none", color: "inherit" }}
               >

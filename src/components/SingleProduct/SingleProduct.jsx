@@ -5,7 +5,7 @@ import ScrollToTop from "../../config";
 import SingleProductCard from "./SingleProductCard";
 import SkeletonCard from "./SingleProductCardSkeleton";
 
-const SingleProduct = () => {
+const SingleProduct = ({ user, isAuth }) => {
   const { category, id } = useParams();
 
   const { data, isLoading } = useGetProductByCategoryAndIdQuery({
@@ -13,14 +13,14 @@ const SingleProduct = () => {
     id,
   });
 
-  console.log(data);
-
   ScrollToTop();
 
   return (
     <div className="container">
       {isLoading && <SkeletonCard />}
-      {data && <SingleProductCard data={data?.[0]} />}
+      {data && (
+        <SingleProductCard isAuth={isAuth} user={user} data={data?.[0]} />
+      )}
       <Similar
         isLoading={isLoading}
         category={data?.[0].category}

@@ -39,13 +39,13 @@ const AllProducts = () => {
   useEffect(() => {
     if (!propParam && !titleParam) {
       getProductsByPage({ page: currentPage });
-      console.log("Запрос");
+
       return;
     }
 
     if (titleParam) {
       getProductsByTitle({ title: titleParam, page: currentPage });
-      console.log("Запрос по названию", titleParam);
+
       return;
     }
 
@@ -60,8 +60,6 @@ const AllProducts = () => {
     getProductsByPage,
     getProductsByTitle,
   ]);
-
-  console.log(productsByTitle);
 
   const data = useMemo(() => {
     if (!propParam && !titleParam) {

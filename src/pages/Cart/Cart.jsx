@@ -1,18 +1,34 @@
+import { Link } from "react-router-dom";
 import style from "./Cart.module.scss";
 
 const Cart = ({ isAuth, data }) => {
-  // const cart = data?.[0].cart;
+  const cart = data?.[0].cart;
 
-  // console.log(cart);
   return (
     <div className="container">
       <div className={style.cart}>
         {!isAuth && (
-          <p>Please log in to Tech Heim to see products in your cart</p>
+          <p className={style.text}>
+            Please log in to Tech Heim to see products in your cart
+          </p>
         )}
-        {isAuth && data && (
+        {isAuth && cart?.length == 0 && (
+          <p className={style.text}>
+            Your cart is empty. Add {""}
+            <Link
+              to="/products"
+              style={{ color: "inherit", textDecoration: "underline" }}
+            >
+              products
+            </Link>{" "}
+            you liked
+          </p>
+        )}
+        {isAuth && cart?.length > 0 && (
           <ul className={style.list}>
-            <li className={style.item}>Product</li>
+            {cart.map((prod) => (
+              <li key={prod.id}>Product</li>
+            ))}
           </ul>
         )}
       </div>

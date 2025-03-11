@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import store from "./store/store.js";
 import "./firebase.js";
 import { SkeletonTheme } from "react-loading-skeleton";
+import "./App.css";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

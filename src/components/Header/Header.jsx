@@ -12,7 +12,6 @@ import style from "./Header.module.scss";
 
 const Header = ({ auth, isAuth, setIsAuth, data, setModal }) => {
   const location = useLocation();
-
   const goTo = useNavigate();
 
   const [, setSearchParams] = useSearchParams();
@@ -87,11 +86,14 @@ const Header = ({ auth, isAuth, setIsAuth, data, setModal }) => {
               </form>
             </li>
             <li>
-              <Link to="/cart">
+              <Link style={{ color: "inherit" }} to="/cart">
                 <img src="/icons/bag.svg" alt="cart" />
+                {data && data?.[0].cart.length > 0 && (
+                  <span>{data?.[0].cart.length}</span>
+                )}
               </Link>
             </li>
-            {!isAuth && (
+            {!isAuth && !data && (
               <li style={{ cursor: "pointer" }} onClick={() => setModal(true)}>
                 <img src="/icons/profile.svg" alt="login" />
               </li>
@@ -108,7 +110,7 @@ const Header = ({ auth, isAuth, setIsAuth, data, setModal }) => {
                       setIsAuth(null);
                     }}
                   >
-                    <img src={signout} alt="sign out" />{" "}
+                    <img src={signout} alt="sign out" />
                   </button>
                 </li>
               </>

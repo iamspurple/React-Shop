@@ -167,14 +167,14 @@
         }
 
         .username::before {
-          background: url(../icons/user.svg) center/contain no-repeat;
+          background: url(/icons/user.svg) center/contain no-repeat;
         }
         .email::before {
-          background: url(../icons/sms.svg) center/contain no-repeat;
+          background: url(/icons/sms.svg) center/contain no-repeat;
         }
 
         .password::before {
-          background: url(../icons/key.svg) center/contain no-repeat;
+          background: url(/icons/key.svg) center/contain no-repeat;
         }
 
         .visible {

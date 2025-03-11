@@ -4,6 +4,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 400px;
+  .text {
+    font-weight: 300;
+    font-size: 24px;
+  }
 
   .list {
     display: flex;

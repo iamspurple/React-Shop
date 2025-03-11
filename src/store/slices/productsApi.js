@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const productsApi = createApi({
   reducerPath: "productsApi",
+  tagTypes: ["products", "users"],
   baseQuery: fetchBaseQuery({
     baseUrl: "https://1179cf3e63182b49.mokky.dev",
   }),
@@ -43,13 +44,15 @@ export const productsApi = createApi({
     }),
     getUserInfo: build.query({
       query: (uid) => `users?uid=${uid}`,
+      providesTags: ["users"],
     }),
     updateUserInfo: build.mutation({
-      query: ({ uid, ...patch }) => ({
-        url: `users?uid=${uid}`,
+      query: ({ id, body }) => ({
+        url: `users/${id}`,
         method: "PATCH",
-        body: patch,
+        body,
       }),
+      invalidatesTags: ["users"],
     }),
   }),
 });
@@ -67,4 +70,5 @@ export const {
   //users
   useCreateNewUserMutation,
   useLazyGetUserInfoQuery,
+  useUpdateUserInfoMutation,
 } = productsApi;

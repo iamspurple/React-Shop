@@ -31,7 +31,6 @@ function App() {
       getUserInfo(isAuth.uid);
     }
   }, [isAuth, getUserInfo]);
-  console.log(auth.currentUser, isAuth);
 
   return (
     <>
@@ -48,7 +47,10 @@ function App() {
         <Route path="/products" element={<AllProducts />} />
         <Route path="/products/special/:prop" element={<AllProducts />} />
         <Route path="/products/special/:prop" element={<AllProducts />} />
-        <Route path="/products/:category/:id" element={<SingleProduct />} />
+        <Route
+          path="/products/:category/:id"
+          element={<SingleProduct user={data?.[0]} isAuth={isAuth} />}
+        />
         <Route path="/cart" element={<Cart isAuth={isAuth} data={data} />} />
         <Route path="/contact" element={<ContactUs />} />
       </Routes>

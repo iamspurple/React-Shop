@@ -1,15 +1,39 @@
 import style from "./SingleProduct.module.scss";
-
+import { useUpdateUserInfoMutation } from "../../store/slices/productsApi";
 import Like from "/icons/heart.svg";
 import Share from "/icons/directbox-send.svg";
 
-const SingleProductCard = ({ data }) => {
+const SingleProductCard = ({ user, isAuth, data }) => {
+  const [updateUserInfo] = useUpdateUserInfoMutation();
+
+  const handleLike = () => {
+    if (isAuth && user && data) {
+      const updatedFavorites = [...user.favorites, { id: data?.id }];
+      const id = user?.id;
+      console.log(updatedFavorites);
+      updateUserInfo({ id, body: { favorites: updatedFavorites } });
+    } else {
+      alert("You need to log in first");
+    }
+  };
+
+  const handleAddToCart = () => {
+    if (isAuth && user && data) {
+      const updatedCart = [...user.cart, { id: data?.id }];
+      const id = user?.id;
+      console.log(updatedCart);
+      updateUserInfo({ id, body: { cart: updatedCart } });
+    } else {
+      alert("You need to log in first");
+    }
+  };
+
   return (
     <div className={style.single_product}>
       <div className={style.image}>
         <img src={data?.image} alt={data?.title} />
         <div className={style.icons}>
-          <button className="like">
+          <button onClick={() => handleLike()} className="like">
             <img src={Like} alt="like" />
             Add to Favorites
           </button>
@@ -70,7 +94,7 @@ const SingleProductCard = ({ data }) => {
           </div>
           <div className={style.buttons}>
             <button className={style.blue}>Buy Now</button>
-            <button>Add to cart</button>
+            <button onClick={() => handleAddToCart()}>Add to cart</button>
           </div>
         </div>
         <ul className={style.advantages}>
