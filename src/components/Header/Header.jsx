@@ -22,21 +22,12 @@ const Header = ({ auth, isAuth, setIsAuth, data, setModal }) => {
     const text = e.target["search"].value;
 
     if (text) {
-      const params = new URLSearchParams();
-
-      params.set("search", text);
-
-      if (location !== "/products") {
-        goTo("products");
-      }
-
-      setSearchParams(params, {
-        preventScrollReset: true,
-      });
-
+      location.pathname === "/products"
+        ? setSearchParams({ search: text })
+        : goTo(`/products?search=${text}`);
       return;
     }
-    goTo("products");
+    setSearchParams();
   };
 
   return (

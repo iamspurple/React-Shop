@@ -1,4 +1,4 @@
-import { useParams, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import SideBar from "../../components/SideBar/SideBar";
 
@@ -13,15 +13,18 @@ import ProductsList from "./ProductsList";
 
 const AllProducts = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const params = useParams();
 
-  const propParam = params.prop;
+  const propParam = searchParams.get("prop");
   const titleParam = searchParams.get("search");
   const pageParam = searchParams.get("page");
 
-  console.log(titleParam);
+  const [currentPage, setCurrentPage] = useState(pageParam);
 
-  const [currentPage, setCurrentPage] = useState(pageParam ?? 1);
+  useEffect(() => {
+    if (!pageParam) {
+      setCurrentPage(1);
+    }
+  }, [pageParam]);
 
   const [getProductsByPage, { data: products, isLoading: isProductsLoading }] =
     useLazyGetProductsByPageQuery();
@@ -104,7 +107,10 @@ const AllProducts = () => {
       top: 0,
       behavior: "smooth",
     });
-    setSearchParams({ page });
+    setSearchParams((searchParams) => {
+      searchParams.set("page", page);
+      return searchParams;
+    });
   };
 
   return (

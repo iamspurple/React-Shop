@@ -45,13 +45,14 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route path="/products/:category" element={<ProductsByCategory />} />
         <Route path="/products" element={<AllProducts />} />
-        <Route path="/products/special/:prop" element={<AllProducts />} />
-        <Route path="/products/special/:prop" element={<AllProducts />} />
         <Route
           path="/products/:category/:id"
           element={<SingleProduct user={data?.[0]} isAuth={isAuth} />}
         />
-        <Route path="/cart" element={<Cart isAuth={isAuth} data={data} />} />
+        <Route
+          path="/cart"
+          element={<Cart isAuth={isAuth} user={data?.[0]} />}
+        />
         <Route path="/contact" element={<ContactUs />} />
       </Routes>
       <Footer />

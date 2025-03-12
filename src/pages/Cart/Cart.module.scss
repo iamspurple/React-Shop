@@ -15,7 +15,55 @@
     flex-direction: column;
 
     .item {
-      color: v.$blue;
+      display: flex;
+      flex-direction: row;
+      padding: 20px;
+      justify-content: space-between;
+      box-shadow: v.$shadow;
+
+      & img {
+        width: 180px;
+        aspect-ratio: 1;
+        object-fit: contain;
+      }
+
+      .details {
+        display: flex;
+        flex-direction: column;
+
+        .title {
+          font-weight: 400;
+          font-size: 16px;
+        }
+
+        .advantages {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+        }
+
+        .price {
+          font-weight: 200;
+          font-size: 18px;
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+          gap: 10px;
+
+          .oldPrice {
+            font-weight: 300;
+            font-size: 14px;
+            text-decoration: line-through;
+            color: v.$grey;
+          }
+        }
+      }
+
+      .controls {
+        display: flex;
+        flex-direction: row;
+        align-self: baseline;
+      }
     }
   }
 }

@@ -1,8 +1,25 @@
 import { Link } from "react-router-dom";
 import style from "./Cart.module.scss";
+import CartList from "./CartList";
+import { useUpdateUserInfoMutation } from "../../store/slices/productsApi";
 
-const Cart = ({ isAuth, data }) => {
-  const cart = data?.[0].cart;
+const Cart = ({ isAuth, user }) => {
+  const cart = user?.cart;
+
+  const [updateUserInfo] = useUpdateUserInfoMutation();
+
+  const handleEmpty = () => {
+    if (isAuth && user) {
+      updateUserInfo({ id: user?.id, body: { cart: [] } });
+    }
+  };
+
+  // const handleDecrease = (itemId) => {
+
+  //   if (isAuth && data) {
+  //     updateUserInfo({id: data[0].id}, body: {})
+  //   }
+  // }
 
   return (
     <div className="container">
@@ -25,11 +42,12 @@ const Cart = ({ isAuth, data }) => {
           </p>
         )}
         {isAuth && cart?.length > 0 && (
-          <ul className={style.list}>
-            {cart.map((prod) => (
-              <li key={prod.id}>Product</li>
-            ))}
-          </ul>
+          <>
+            <CartList user={user} list={cart} />
+            <button onClick={() => handleEmpty()}>
+              Empty the shopping cart
+            </button>
+          </>
         )}
       </div>
     </div>
