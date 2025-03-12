@@ -12,7 +12,7 @@ import AccountModal from "./pages/AccountModal/AccountModal";
 import { useEffect, useState } from "react";
 import ProductsByCategory from "./pages/AllProducts/ProductsByCategory";
 import { useLazyGetUserInfoQuery } from "./store/slices/productsApi";
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 function App() {
   const [modal, setModal] = useState(false);
@@ -21,10 +21,12 @@ function App() {
   const [isAuth, setIsAuth] = useState(auth.currentUser);
 
   useEffect(() => {
-    if (auth.currentUser) {
-      setIsAuth(auth.currentUser);
-    }
-  }, [auth.currentUser]);
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsAuth(user);
+      }
+    });
+  }, [auth]);
 
   useEffect(() => {
     if (isAuth) {
