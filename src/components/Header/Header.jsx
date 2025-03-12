@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 
 import signout from "/icons/signout.svg";
+import heart from "/icons/favorite.svg";
 
 import style from "./Header.module.scss";
 
@@ -76,6 +77,13 @@ const Header = ({ auth, isAuth, setIsAuth, data, setModal }) => {
                 <input placeholder="Search... " type="search" name="search" />
               </form>
             </li>
+            {isAuth && data && (
+              <li className={style.account}>
+                <Link style={{ display: "flex" }} to="/favorites">
+                  <img width={24} src={heart} alt="favorites" />
+                </Link>
+              </li>
+            )}
             <li>
               <Link style={{ color: "inherit" }} to="/cart">
                 <img src="/icons/bag.svg" alt="cart" />
@@ -84,7 +92,7 @@ const Header = ({ auth, isAuth, setIsAuth, data, setModal }) => {
                 )}
               </Link>
             </li>
-            {!isAuth && !data && (
+            {!isAuth && (
               <li style={{ cursor: "pointer" }} onClick={() => setModal(true)}>
                 <img src="/icons/profile.svg" alt="login" />
               </li>
