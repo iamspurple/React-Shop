@@ -66,6 +66,24 @@
         }
       }
 
+      .cart {
+        position: relative;
+
+        & span {
+          display: inline-block;
+          width: 1.3em;
+          text-align: center;
+          border-radius: 50%;
+          font-weight: 200;
+          font-size: 12px;
+          color: white;
+          background-color: $light-blue;
+          position: absolute;
+          right: -0.5em;
+          bottom: 0em;
+        }
+      }
+
       .account {
         font-weight: 300;
         font-size: 24px;

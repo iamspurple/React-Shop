@@ -84,7 +84,7 @@ const Header = ({ auth, isAuth, setIsAuth, data, setModal }) => {
                 </Link>
               </li>
             )}
-            <li>
+            <li className={style.cart}>
               <Link style={{ color: "inherit" }} to="/cart">
                 <img src="/icons/bag.svg" alt="cart" />
                 {isAuth && data && data?.[0].cart.length > 0 && (
