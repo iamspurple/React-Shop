@@ -16,17 +16,21 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 function App() {
   const [modal, setModal] = useState(false);
+
+  const [login, setLogin] = useState(false);
   const [getUserInfo, { data }] = useLazyGetUserInfoQuery();
   const auth = getAuth();
   const [isAuth, setIsAuth] = useState(auth.currentUser);
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setIsAuth(user);
-      }
-    });
-  }, [auth]);
+    if (login) {
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          setIsAuth(user);
+        }
+      });
+    }
+  }, [login, auth]);
 
   useEffect(() => {
     if (isAuth) {
@@ -59,7 +63,11 @@ function App() {
       </Routes>
       <Footer />
       {modal ? (
-        <AccountModal getUserInfo={getUserInfo} setModal={setModal} />
+        <AccountModal
+          setLogin={setLogin}
+          getUserInfo={getUserInfo}
+          setModal={setModal}
+        />
       ) : null}
     </>
   );

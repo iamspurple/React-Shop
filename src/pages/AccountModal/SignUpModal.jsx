@@ -45,11 +45,19 @@ const SignUpModal = ({ setOpened, setModal }) => {
       .catch((error) => {
         console.error(error);
         setOpened("signup-error");
+        setTimeout(() => {
+          setModal(false);
+        }, 2000);
       });
   };
 
   return (
-    <div className={style.wrapper} onClick={(e) => e.stopPropagation()}>
+    <div
+      className={style.wrapper}
+      onClick={(e) => {
+        e.stopPropagation();
+      }}
+    >
       <div className={style.container}>
         <button
           className={style.close}
@@ -65,7 +73,13 @@ const SignUpModal = ({ setOpened, setModal }) => {
           <div className={style.active}>Create Account</div>
         </div>
         <h2 className={style.title}>Create your account</h2>
-        <form className={style.form} onSubmit={(e) => e.preventDefault()}>
+        <form
+          className={style.form}
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSignUp(userInfo.name, userInfo.email, userInfo.password);
+          }}
+        >
           <div className={style.username}>
             <input
               required
@@ -97,6 +111,7 @@ const SignUpModal = ({ setOpened, setModal }) => {
               type={visible ? "text" : "password"}
               value={userInfo.password}
               placeholder="Password"
+              minLength={6}
               onChange={(e) =>
                 setUserInfo({ ...userInfo, password: e.target.value })
               }
@@ -109,13 +124,7 @@ const SignUpModal = ({ setOpened, setModal }) => {
               <img src={visible ? Open : Closed} alt="Change visability" />
             </button>
           </div>
-          <button
-            className={style.submit}
-            type="submit"
-            onClick={() =>
-              handleSignUp(userInfo.name, userInfo.email, userInfo.password)
-            }
-          >
+          <button className={style.submit} type="submit">
             Sign Up
           </button>
         </form>

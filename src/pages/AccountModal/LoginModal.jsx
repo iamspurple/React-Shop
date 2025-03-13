@@ -8,7 +8,7 @@ import Button from "/icons/close-button.svg";
 
 import style from "./AccountModal.module.scss";
 
-const LoginModal = ({ getUserInfo, setOpened, setModal }) => {
+const LoginModal = ({ setLogin, getUserInfo, setOpened, setModal }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -22,6 +22,7 @@ const LoginModal = ({ getUserInfo, setOpened, setModal }) => {
     const auth = getAuth(app);
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
+        setLogin(true);
         getUserInfo(user.uid);
         setOpened("login-okay");
         setTimeout(() => {

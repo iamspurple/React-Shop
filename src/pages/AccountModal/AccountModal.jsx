@@ -5,13 +5,14 @@ import style from "./AccountModal.module.scss";
 import Okay from "./Okay";
 import Error from "./Error";
 
-const AccountModal = ({ getUserInfo, setModal }) => {
+const AccountModal = ({ setLogin, getUserInfo, setModal }) => {
   const [opened, setOpened] = useState("login");
 
   return (
     <div className={style.modal} onClick={() => setModal(false)}>
       {opened === "login" && (
         <LoginModal
+          setLogin={setLogin}
           getUserInfo={getUserInfo}
           setOpened={setOpened}
           setModal={setModal}
