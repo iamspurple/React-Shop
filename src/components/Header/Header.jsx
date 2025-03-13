@@ -105,8 +105,10 @@ const Header = ({ auth, isAuth, setIsAuth, data, setModal }) => {
                 <li className={style.account}>
                   <button
                     onClick={() => {
-                      auth.signOut();
-                      setIsAuth(null);
+                      if (window.confirm("Sign out?")) {
+                        auth.signOut();
+                        setIsAuth(null);
+                      }
                     }}
                   >
                     <img src={signout} alt="sign out" />

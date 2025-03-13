@@ -17,6 +17,18 @@ const SingleProductCard = ({ user, isAuth, data }) => {
     }
   };
 
+  const handleShare = () => {
+    const location = window.location.href;
+    navigator.clipboard
+      .writeText(location)
+      .then(() => {
+        alert("Link have been copied successfully!");
+      })
+      .catch(() => {
+        alert("Something went wrong, please try again!");
+      });
+  };
+
   const isInFavorites = user?.favorites?.find(
     (product) => product.id === data.id
   );
@@ -48,7 +60,7 @@ const SingleProductCard = ({ user, isAuth, data }) => {
               Add to Favorites
             </button>
           )}
-          <button className="share">
+          <button onClick={() => handleShare()} className="share">
             <img src={Share} alt="share" />
             Share
           </button>
