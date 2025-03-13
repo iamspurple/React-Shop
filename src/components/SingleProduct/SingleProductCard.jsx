@@ -17,10 +17,10 @@ const SingleProductCard = ({ user, isAuth, data }) => {
     }
   };
 
-  const isInFavorites = user.favorites.find(
+  const isInFavorites = user?.favorites?.find(
     (product) => product.id === data.id
   );
-  const isInCart = user.cart.find((product) => product.item.id === data.id);
+  const isInCart = user?.cart?.find((product) => product.item.id === data.id);
 
   const handleAddToCart = () => {
     if (isAuth && user && data) {
@@ -61,7 +61,7 @@ const SingleProductCard = ({ user, isAuth, data }) => {
           .split(".")[1]
           .substring(0, 1)}`}</span>
         <p className={style.description}>{data?.description}</p>
-        <table>
+        <table className={style.table}>
           <tbody>
             <tr>
               <td>Brand</td>
