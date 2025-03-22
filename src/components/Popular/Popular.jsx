@@ -26,7 +26,7 @@ const Popular = ({ data, isLoading }) => {
         {data &&
           popular?.map((prod) => (
             <Link
-              to={`/products/${prod.id}`}
+              to={`/products/${prod.category}/${prod.id}`}
               key={prod.id}
               style={{ textDecoration: "none", color: "inherit" }}
             >
