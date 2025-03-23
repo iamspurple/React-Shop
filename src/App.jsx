@@ -46,6 +46,7 @@ function App() {
         setIsAuth={setIsAuth}
         data={data}
         setModal={setModal}
+        login={login}
       />
       <Routes>
         <Route path="/" element={<Homepage />} />

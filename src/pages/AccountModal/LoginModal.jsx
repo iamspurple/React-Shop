@@ -71,6 +71,7 @@ const LoginModal = ({ setLogin, getUserInfo, setOpened, setModal }) => {
               type={visible ? "text" : "password"}
               value={password}
               placeholder="Password"
+              minLength={6}
               onChange={(e) => setPassword(e.target.value)}
             />
             <button

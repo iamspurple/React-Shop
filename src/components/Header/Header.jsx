@@ -11,7 +11,7 @@ import heart from "/icons/favorite.svg";
 
 import style from "./Header.module.scss";
 
-const Header = ({ auth, isAuth, setIsAuth, data, setModal }) => {
+const Header = ({ auth, isAuth, setIsAuth, data, setModal, login }) => {
   const location = useLocation();
   const goTo = useNavigate();
 
@@ -87,8 +87,10 @@ const Header = ({ auth, isAuth, setIsAuth, data, setModal }) => {
             <li className={style.cart}>
               <Link style={{ color: "inherit" }} to="/cart">
                 <img src="/icons/bag.svg" alt="cart" />
-                {isAuth && data && data?.[0].cart.length > 0 && (
-                  <span>{data?.[0].cart.length}</span>
+                {login && isAuth && data && (
+                  <span>
+                    {data?.[0].cart.length > 0 ? data?.[0].cart.length : null}
+                  </span>
                 )}
               </Link>
             </li>
