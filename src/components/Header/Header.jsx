@@ -101,10 +101,10 @@ const Header = ({ auth, isAuth, setIsAuth, data, setModal, login }) => {
                 <img src="/icons/profile.svg" alt="login" />
               </li>
             )}
-            {isAuth && data && (
+            {login && isAuth && data && (
               <>
                 <li className={style.account}>
-                  <span> {data?.[0].name}</span>
+                  <span> {data?.[0]?.name}</span>
                 </li>
                 <li className={style.account}>
                   <button
