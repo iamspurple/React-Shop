@@ -89,7 +89,9 @@ const Header = ({ auth, isAuth, setIsAuth, data, setModal, login }) => {
                 <img src="/icons/bag.svg" alt="cart" />
                 {login && isAuth && data && (
                   <span>
-                    {data?.[0].cart.length > 0 ? data?.[0].cart.length : null}
+                    {data?.[0]?.cart?.length > 0
+                      ? data?.[0]?.cart?.length
+                      : null}
                   </span>
                 )}
               </Link>
