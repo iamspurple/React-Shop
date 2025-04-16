@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
 import style from "./Cart.module.scss";
 import CartList from "./CartList";
 import { useUpdateUserInfoMutation } from "../../store/slices/productsApi";
+import Empty from "./Empty";
 
 const Cart = ({ isAuth, user }) => {
   const cart = user?.cart;
@@ -29,18 +29,7 @@ const Cart = ({ isAuth, user }) => {
             Please log in to Tech Heim to see products in your cart
           </p>
         )}
-        {isAuth && cart?.length == 0 && (
-          <p className={style.text}>
-            Your cart is empty. Add {""}
-            <Link
-              to="/products"
-              style={{ color: "inherit", textDecoration: "underline" }}
-            >
-              products
-            </Link>{" "}
-            you liked
-          </p>
-        )}
+        {isAuth && !cart?.length && <Empty />}
         {isAuth && cart?.length > 0 && (
           <>
             <CartList user={user} list={cart} />
